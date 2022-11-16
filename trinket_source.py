@@ -47,9 +47,7 @@ def twoKey():
 	kTwo = input("\nGive a Site Key, such as a website name:\n> ")[0:12]
 	r = (genResult(kOne, kTwo))
 	print("\nResult:\n" + r + "\n")
-	copyToclipPC(r)
-	if (SAVE):
-		saveTkToFile(kOne, kTwo, r)
+	#copyToclipPC(r)
 
 	return
 
@@ -60,9 +58,8 @@ def oneKey():
 	kTwo = "Default_Key_2"
 	r = (genResult(kOne, kTwo))
 	print("\nResult:\n" + r + "\n")
-	copyToclipPC(r)
-	if (SAVE):
-		saveOkToFile(kOne, r)
+	#copyToclipPC(r)
+
 
 	return
 
@@ -102,11 +99,6 @@ def genResult(key1, key2):
 	return out[0:PASSWORD_LENGTH]
 
 	return
-
-def getTime():
-	today = date.today()
-	d4 = today.strftime("%b-%d-%Y")
-	return d4
 
 #takes three phrases and splices three words together randomly...
 def genUserName():
