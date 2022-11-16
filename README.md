@@ -17,3 +17,6 @@ or (most likely) both. This generates secure passwords
 from simple keys, that are easy to create and remember.
 
 You may need to extract all files before using the application.
+
+Try it here:
+https://pixelatedstarfish.github.io/kb2/?fbclid=IwAR1tHDQtxF_phTFTX3HdbpamGts6dT0YuiZWZzt1rnqLP_21jPx8CAzXT_Q
