@@ -33,7 +33,6 @@ def main(d):
 	getSettings()
 	fileCleaner()
 	print("Ready.\n----")
-	print("Thank you for using the Keybird Password Manager Prototype.\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.\n\nKnown Issues:\nThis app is currently vunerable to over-the-shoulder attacks.\nSomeone looking over your shoulder can see what you are typing and note your information. Please use this app in privacy.") 
 	try: 	
 		if (d[0] == "d" or d[1] == "d"):
 			global DEBUG
@@ -72,6 +71,7 @@ def getSettings():
 
 def menu():
 	while (True):
+		print("Thank you for using the Keybird Password Manager Prototype.\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.\n\nKnown Issues:\nThis app is currently vunerable to over-the-shoulder attacks.\nSomeone looking over your shoulder can see what you are typing and note your information. Please use this app in privacy.")
 		a = input("\nType a number and press enter (return) to select an option:\n0  Help\n1  One Key Mode\n2  Two Key Mode\n3  Username Generator\n4  File Menu\n5  Settings Menu\n6  Disclaimer and License\n7  Erase Data\n8  Close\n> ")
 		if (a == "-1"):
 			test()
@@ -118,6 +118,7 @@ def menu():
 		if (a == "8"):
 			exit()
 		input("Press Return (Enter) to return to the Main Menu.\n> ")
+		clear()
 	return
 
 def twoKey():
@@ -598,6 +599,13 @@ def openNanoMac(s):
 
 	return s
 
+def clear():
+	os.system('cls')
+	return
+def clearMac():
+	os.system('clear')
+	return
+
 def YesOrNo(s):
 	a = str(input(s) + "")
 	try:
@@ -722,6 +730,9 @@ SPECIAL KEYS
 	Edit mode now runs in nano, copy content to _temp and open it in nano. wsl is used to run nano in batch.
 
 SOURCES
+	Clear Screen
+	https://www.csestack.org/clear-python-interpreter-console/
+	
 	Copy to Clipboard
 	https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
 	
