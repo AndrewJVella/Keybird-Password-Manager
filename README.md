@@ -19,4 +19,4 @@ from simple keys, that are easy to create and remember.
 You may need to extract all files before using the application.
 
 Try it here:
-(https://pixelatedstarfish.github.io/Keybird-Password-Manager/)
+(https://tinyurl.com/KeybirdWeb)
