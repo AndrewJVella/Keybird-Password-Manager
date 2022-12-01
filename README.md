@@ -1,5 +1,6 @@
 
 -WELCOME TO KEYBIRD-
+
 You need lots of passwords, but making them is tedious.
 Repeating passwords reduces their effectiveness.
 In-browser managers are fine until they lock you out.
@@ -31,6 +32,7 @@ This generates secure passwords from simple keys,
 that are easy to create and remember.
 
 -FEATURES-
+
 This app uses keys to make passwords.
 The keys are easy to remeber.
 The passwords are secure.
@@ -67,6 +69,7 @@ Nothing is saved on the repl.
 
 
 -INSTALL WSL-
+
 #if you require the windows linux subsystem to run nano (a text editor)
 #run this script in batch
 
@@ -76,12 +79,15 @@ echo End of WSL Installation
 
 
 -GITHUB-
+
 https://github.com/PixelatedStarfish/Keybird-Password-Manager
 
 -WEB REPL-
+
 tinyurl.com/KeybirdWeb
 
 -INDICATORS-
+
 Note that a filename that begins with an underscore is reserved.
 Two underscores means the file is hidden.
 ^ is newline
@@ -89,6 +95,7 @@ Two underscores means the file is hidden.
 >> Masked input
 
 -TESTS-
+
 Tests are written into the source.
 At the main menu select the following:
 -1 for general testing purposes
@@ -96,6 +103,7 @@ At the main menu select the following:
 -3 to generate sample files
 
 -LEGAL-
+
 Disclaimer
 So, in plain terms, this app should be used with some
 care. It is about as secure as a basket of keys. If
@@ -136,6 +144,7 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEAL
 SOFTWARE.
 
 -SOURCES-
+
 Clear Screen
 https://www.csestack.org/clear-python-interpreter-console/
 Copy to Clipboard
