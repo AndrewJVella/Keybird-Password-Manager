@@ -4,6 +4,7 @@ import os
 import base64
 import subprocess
 import sys
+import pwinput
 
 #BASE MENU FUNCTIONS
 def main(d):
@@ -26,28 +27,21 @@ def main(d):
 	try:
 		global KEY_LENGTH
 		global PASSWORD_LENGTH
-		encrypt_to_file("Files/_help.txt", paragraphAlign("^-Help-^^This application is designed to generate\nand store passwords on your computer.\nWhile other managers integrate with your browser,\nthey are much better for accumulating passwords\nthan actually managing them.\nAt worst you can become\ndependant on a specific browser to access your stuff.\nAt best you might still use\na small number of passwords\nyou wrote yourself for the important stuff,\nwhich puts the important stuff at risk.") + "\n\n" + paragraphAlign("My thinking is that 100 auto-generated passwords is bad,\na small number of manually created passwords is worse,\nand both of these together is what often happens.\nInstead of coming up with a few compilcated\npasswords and using them everywhere,\ndepending on a browser extension,\nor (most likely) both\nThis generates secure passwords from simple keys,\nthat are easy to create and remember.") + "\n\n" + paragraphAlign("Keys are " +str(KEY_LENGTH)+ " characters max.^Passwords are " + str(PASSWORD_LENGTH) +" characters."))
+		encrypt_to_file("Files/_help.txt", docs())
 	except Exception:
 		pass
 	print("Loading Settings.")
 	getSettings()
 	fileCleaner()
 	print("Ready.\n----")
-	try: 	
-		if (d[0] == "d" or d[1] == "d"):
-			global DEBUG
-			DEBUG = True 
-		if (d[0] == "s" or d[1] == "s"):
-			global SAVE
-			SAVE = True
-	except IndexError:
-		pass #no arg
+	clear()
 	menu()
 	return
 
 def getSettings():
 	global SAVE
-	global DEBUG 
+	global MASK
+	global DEBUG
 	try:
 		
 		f = open("Files/__Settings.txt", "r")
@@ -58,8 +52,12 @@ def getSettings():
 		if (s[0] == "1"):
 			SAVE = True
 		if (s[1] == "0"):
-			DEBUG = False
+			MASK = False
 		if (s[1] == "1"):
+			MASK = True
+		if (s[2] == "0"):
+			DEBUG = False
+		if (s[2] == "1"):
 			DEBUG = True
 	except IndexError: #no settings
 		
@@ -71,7 +69,7 @@ def getSettings():
 
 def menu():
 	while (True):
-		print("Thank you for using the Keybird Password Manager Prototype.\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.\n\nKnown Issues:\nThis app is currently vunerable to over-the-shoulder attacks.\nSomeone looking over your shoulder can see what you are typing and note your information. Please use this app in privacy.")
+		print("Thank you for using the Keybird Password Manager Prototype.\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.")
 		a = input("\nType a number and press enter (return) to select an option:\n0  Help\n1  One Key Mode\n2  Two Key Mode\n3  Username Generator\n4  File Menu\n5  Settings Menu\n6  Disclaimer and License\n7  Erase Data\n8  Close\n> ")
 		if (a == "-1"):
 			test()
@@ -83,7 +81,7 @@ def menu():
 				for i in range(10):
 					randomSampleFile(randomKey())
 		if (a == "0"):
-			print(decrypt_file("Files/_help.txt"))
+			print(docs())
 		if (a == "1"):
 			oneKey()
 		if (a == "2"):
@@ -95,11 +93,13 @@ def menu():
 		if (a == "5"): #val in parens right by each option
 			SettingsMenu("SettingsMenu")
 		if (a == "6"):
-			print("-Disclaimer-\n")
+			clear()
+			print("Disclaimer\n")
 			print(paragraphAlign("So, in plain terms, this app should be used with some care. It is about as secure as a basket of keys. If you keep it behind a locked door, your keys should stay put because only trusted people get anywhere near them. By analogy this app is the basket, and your computer is the door. You should be sure that your computer is secured and safe before using this app. No information produced in whole or part by this app is garenteed to be perfectly safe. Your files can be read, modified, or deleted. The app source code can also be read, modfied, or deleted, which would cause unpredictable effects while running the app. Back up important things; store your passwords in a few safe places. Keep untrustworthy people off your computer. Do not store your passwords publicly, or generate them with keys that are easy to guess. Stay safe!"))
 			print("\n\n")
 			print(paragraphAlign('MIT License^^Copyright (c) 2022 Andrew Vella^^Permission is hereby granted, free of charge, to any person obtaining a copy^of this software and associated documentation files (the "Software"), to deal^in the Software without restriction, including without limitation the rights^to use, copy, modify, merge, publish, distribute, sublicense, and/or sell^copies of the Software, and to permit persons to whom the Software is^furnished to do so, subject to the following conditions:^^The above copyright notice and this permission notice shall be included in all^copies or substantial portions of the Software.^^THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR^IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,^FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE^AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER^LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,^OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE^SOFTWARE.'))
 		if (a == "7"):
+			clear()
 			h = YesOrNo("Erase all data and close? (y/n). This will end thr current session.\n")
 			if (h):
 				l = os.listdir("Files")
@@ -117,35 +117,54 @@ def menu():
 				
 		if (a == "8"):
 			exit()
-		input("Press Return (Enter) to return to the Main Menu.\n> ")
+		input("Press Return (Enter) to return to the Main Menu.\n>")
 		clear()
 	return
 
 def twoKey():
-	
-	#Password generator
-	kOne = input("\nGive a Username Key. Be sure it is not easily guessed:\n> ")[0:12]
-	kTwo = input("\nGive a Site Key, such as a website name:\n> ")[0:12]
+	global KEY_LENGTH
+	kOne = ""
+	kTwo = ""
+
+	clear()
+	print("\nGive a Username Key. Be sure it is not easily guessed:\n")
+	if (MASK):
+		kOne = pwinput.pwinput(">>  ")
+	if (not MASK):
+		kOne = input(">  ")
+
+	kTwo = input("\nGive a Site Key, such as a website name:\n> ")[0:KEY_LENGTH]
 	r = (genResult(kOne, kTwo))
-	print("\nResult:\n" + r + "\n")
+	if (MASK):
+		print("\nResult:\n" + ("*" * PASSWORD_LENGTH) + "\n")
+	if (not MASK):
+		print("\nResult:\n" + r + "\n")
+
 	copyToclipPC(r)
 	if (SAVE):
 		saveTkToFile(kOne, kTwo, r)
-
 	return
 
 def oneKey():
-	
-	#Password generator
-	kOne = input("\nGive a Key, such as a word you will remember. Be sure it is not easily guessed:\n> ")[0:12]
+	global MASK
+	kOne = ""
+
+	clear()
+	print("\nGive a Key, such as a word you will remember. Be sure it is not easily guessed:\n")
+	if (MASK):
+		kOne = pwinput.pwinput(">>  ")[0:KEY_LENGTH]
+	if (not MASK):
+		kOne = input(">  ")
 	kTwo = "Default_Key_2"
 	r = (genResult(kOne, kTwo))
-	print("\nResult:\n" + r + "\n")
+	if (MASK):
+		print("\nResult:\n" + ("*" * PASSWORD_LENGTH) + "\n")
+	if (not MASK):
+		print("\nResult:\n" + r + "\n")
+
 	copyToclipPC(r)
 	if (SAVE):
 		saveOkToFile(kOne, r)
-
-
 	return
 
 def genResult(key1, key2):
@@ -182,22 +201,21 @@ def genResult(key1, key2):
 	#adjust to length
 
 	return out[0:PASSWORD_LENGTH]
-	
-def getTime():
-
-	return None
 
 def saveTkToFile(kOne, kTwo, r):
+	global MASK
 	#this used to ask to save. Now it is a setting.
 	h = 'y'
 	if (h[0].lower().lstrip() == 'y'):
-		t = getTime()
 		content =  "\nSite Key:\t" + kTwo + "\nPassword:\t" + r + "\n"
 
 		#make the file, if it exists, move on
 		try:
 			f = open("Files/" + kOne + ".txt", "x")
-			print("Created '" + kOne + ".txt'") 
+			if (not MASK):
+				print("Created '" + kOne + ".txt'") 
+			if (MASK):
+				print("Created new file")
 			f.close()
 			encrypt_to_file("User key:\t" + "\n")
 		except Exception as e:
@@ -206,7 +224,11 @@ def saveTkToFile(kOne, kTwo, r):
 		s = decrypt_file("Files/" + kOne + ".txt")
 		s += content
 		encrypt_to_file("Files/" + kOne + ".txt", s)
-		print("Added to '" + kOne + ".txt'\n")
+
+		if (not MASK):
+			print("Added to '" + kOne + ".txt'")
+		if (MASK):
+			print("Added to file")
 	return
 
 def saveOkToFile(kOne, r):
@@ -214,7 +236,6 @@ def saveOkToFile(kOne, r):
 	#this used to ask to save. Now it is a setting.
 	h = 'y'
 	if (h[0].lower().lstrip() == 'y'):
-		t = getTime()
 		content = "Key:\t\t" + kOne + "\nPassword:\t" + r + "\n"
 
 		#make the file, if it exists, move on
@@ -235,7 +256,8 @@ def saveOkToFile(kOne, r):
 
 #takes three phrases and splices three words together randomly...
 def genUserName():
-
+	clear()
+	print("Username Generator")
 	p1 = input("\nGive a name you like:\n> ")
 	p2 = input("\nGive a hobby:\n> ")
 	p3 = input("\nGive a memorable reference:\n> ")
@@ -261,10 +283,10 @@ def genUserName():
 	#randomly choose listed names
 	outList =[] 
 	while (i > 0):
-	 	r = random.randint(0, len(nameList) -1)
-	 	outList.append(nameList[r])
-	 	nameList.remove(nameList[r])
-	 	i = i - 1
+		r = random.randint(0, len(nameList) -1)
+		outList.append(nameList[r])
+		nameList.remove(nameList[r])
+		i = i - 1
 
 	#display outlist and prompt for number to select, if the selection is not in the list, run again, copy selection to clipboard and return
 
@@ -280,54 +302,69 @@ def genUserName():
 	
 #SUBMENUS
 def SettingsMenu(a):
-	while (not a == "4"):
+	while (not a == "5"):
 		global SAVE
+		global MASK
 		global DEBUG
 		if (a == "SettingsMenu"):
-
+			clear()
 			print("Settings Menu\n\n0  Help")
 			print ("1  File Saving      (" + menuBooleanFormatter(SAVE) + ")")
-			print ("2  Debug Mode       (" + menuBooleanFormatter(DEBUG) + ")")
-			print ("3  Retore Defaults\n4  Back to Main Menu\n5  Close")
+			print ("2  Masking          (" + menuBooleanFormatter(MASK) + ")")
+			print ("3  Debug Mode       (" + menuBooleanFormatter(DEBUG) + ")")
+			print ("4  Retore Defaults\n5  Back to Main Menu\n6  Close")
 			b = input("> ")
-			if (not a == "4"):
+			if (not a == "5"):
 				SettingsMenu(b)
 			menu()
 		if (a == "0"):
 			print ("1  Toggle the option to save to a file.")
-			print ("2  Toggle the option to display errors.")
-			print ("3  Retore settings to default.\n4  Return to the Main Menu.\n5  End session.")
+			print ("2  Toggle the option to mask passwords.")
+			print ("3  Toggle the option to display errors.")
+			print ("4  Retore settings to default.\n5  Return to the Main Menu.\n6  End session.")
 
 		if (a == "1"):
 			SAVE = (not SAVE)
 			print("Set to " + menuBooleanFormatter(SAVE))
 		if (a == "2"):
+			MASK = (not MASK)
+			print("Set to " + menuBooleanFormatter(MASK))
+		if (a == "3"):
 			DEBUG = (not DEBUG)
 			print("Set to " + menuBooleanFormatter(DEBUG))
-		if (a == "1" or a == "2"):
+		if (a == "1" or a == "2" or a == "3"):
 			o = ""
-			if (SAVE and DEBUG):
-				o = "11"
-			if (SAVE and not DEBUG):
-				o = "10"
-			if (not SAVE and DEBUG):
-				o = "01"
-			if (not SAVE and not DEBUG):
-				o = "00"
-
+			if (not SAVE and not MASK and not DEBUG):
+				o = "000"
+			if (not SAVE and not MASK and DEBUG):
+				o = "001"
+			if (not SAVE and  MASK and not DEBUG):
+				o = "010"
+			if (not SAVE and MASK and  DEBUG):
+				o = "011"
+			if (SAVE and not MASK and not DEBUG):
+				o = "100"
+			if (SAVE and not MASK and DEBUG):
+				o = "101"
+			if (SAVE and  MASK and not DEBUG):
+				o = "110"
+			if (SAVE and MASK and  DEBUG):
+				o = "111"
+			
+		
 			f = open("Files/__Settings.txt", "w") 
 			f.write(o) 
 			f.close()
 			print("\nSaved.\n")
 
-		if (a == "3"):
+		if (a == "4"):
 			SAVE = False
 			DEBUG = False
 			f = open("Files/__Settings.txt", "w") 
 			f.write(defaultConstant())
 			close()
 			print("\nRestored.\n")
-		if (a == "5"):
+		if (a == "6"):
 			exit()
 	
 		input("Press Return (Enter) to return to the Settings Menu.\n> ")
@@ -338,7 +375,11 @@ def FileMenu(a):
 	while (not a == "5"):
 		global SAVE
 		global DEBUG
+		global MASK
 		if (a == "FileMenu"):
+			clear()
+			if (MASK):
+				print ("\n-Please note that all text in this menu is not masked or hidden. All file content will be plainly visible.")
 
 			print("Files Menu\n\n0  Help\n1  List Files\n2  Read File\n3  Edit File\n4  Delete File\n5  Back to Main Menu\n6  Close.")
 			b = input("> ")
@@ -433,7 +474,7 @@ def menuBooleanFormatter(b):
 	return "OFF"
 
 def defaultConstant(): #for settings; files on, debug off
-	return "10"
+	return "110"
 
 #ENCRYPTION AND DECRYPTION
 
@@ -536,6 +577,173 @@ def removeDuplicates(a):
 			temp = i[0]
 	return out
 
+#DOCS
+
+def docs():
+	s= '''
+
+	-WELCOME TO KEYBIRD-
+	You need lots of passwords, but making them is tedious.
+	Repeating passwords reduces their effectiveness.
+	In-browser managers are fine until they lock you out. 
+	You may ask yourself:
+	"What was my password again?"
+	"Why does Safari fill in the wrong info?"
+	"Did I make this account on Google?"
+	Skip that nonsense, use Keybird.
+
+	Keybird is designed to generate
+	and store passwords on your computer.
+	While other managers integrate with your browser,
+	they are much better for accumulating passwords
+	than actually managing them. At worst you can become
+	dependant on a specific browser to access your stuff.
+	At best you might still use a small number of passwords
+	you wrote yourself for the important stuff,
+	which puts the important stuff at risk.
+
+	My thinking is that 100 auto-generated passwords is bad,
+	a small number of manually created passwords is worse,
+	and both of these together is what often happens.
+	Instead of coming up with a few compilcated
+	passwords and using them everywhere,
+	depending on a browser extension,
+	or (most likely) both
+	
+	This generates secure passwords from simple keys,
+	that are easy to create and remember.
+
+	-FEATURES-
+	This app uses keys to make passwords.
+	The keys are easy to remeber.
+	The passwords are secure.
+	Keys are 16 characters max.
+	Passwords are 16 characters.
+
+	Two Key Mode.
+	One private key and many public keys.
+	The public keys can be website names.
+	You can have many passwords.
+	You only need to remeber one key.
+
+	Username Generator.
+	Helps you think of usernames. 
+	It asks questions, and generates names.
+
+	Files.
+	These store passwords and keys.
+	They are encrypted to prevent accidents.
+	They are not protected from app users.
+	Files are cleaned at start up.
+	Files are alphabatized by key.
+	Duplicate info is deleted.
+
+	Settings
+	Toggle file saving
+	Toggle masking, which covers private stuff.
+	Toggle debug mode, which prints errors.
+
+	Web Repl
+	Use the repl when you leave this app at home.
+	If you need a password quickly, use your key.
+	Nothing is saved on the repl.
+
+
+	-INSTALL WSL-
+	#if you require the windows linux subsystem to run nano (a text editor) 
+	#run this script in batch
+
+	echo WSL Installation
+	wsl --install
+	echo End of WSL Installation
+
+
+	-GITHUB-
+	https://github.com/PixelatedStarfish/Keybird-Password-Manager
+
+	-WEB REPL-
+	tinyurl.com/KeybirdWeb
+
+	-INDICATORS-
+	Note that a filename that begins with an underscore is reserved. 
+	Two underscores means the file is hidden.
+	^ is newline
+	> Indicates input
+	>> Masked input
+
+	-TESTS-
+	Tests are written into the source.
+	At the main menu select the following:
+	-1 for general testing purposes
+	-2 to run the file cleaner
+	-3 to generate sample files
+
+	-LEGAL-
+	Disclaimer
+	So, in plain terms, this app should be used with some
+	care. It is about as secure as a basket of keys. If
+	you keep it behind a locked door, your keys should
+	stay put because only trusted people get anywhere near
+	them. By analogy this app is the basket, and your computer
+	is the door. You should be sure that your computer
+	is secured and safe before using this app. No information
+	produced in whole or part by this app is garenteed
+	to be perfectly safe. Your files can be read, modified,
+	or deleted. The app source code can also be read, modfied,
+	or deleted, which would cause unpredictable effects
+	while running the app. Back up important things; store
+	your passwords in a few safe places. Keep untrustworthy
+	people off your computer. Do not store your passwords
+	publicly, or generate them with keys that are easy
+	to guess. Stay safe!
+
+	MIT License
+
+	Copyright (c) 2022 Andrew Vella
+
+	Permission is hereby granted, free of charge, to any person obtaining 
+	a copy of this software and associated documentation files (the "Software"), 
+	to deal in the Software without restriction, including without limitation the 
+	rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+	sell copies of the Software, and to permit persons to whom the Software is furnished 
+	to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all copies
+	or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+	INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+	PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
+	FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+	ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+
+	-SOURCES-
+	Clear Screen
+	https://www.csestack.org/clear-python-interpreter-console/
+	Copy to Clipboard
+	https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
+	Encryption
+	https://www.geeksforgeeks.org/encoding-and-decoding-base64-strings-in-python/
+	Get Current Working Directory
+	https://note.nkmk.me/en/python-os-getcwd-chdir/
+ 	License
+ 	https://choosealicense.com/
+	Nano
+	https://www.nano-editor.org/dist/latest/nano.html
+	Password Masking 
+	https://stackoverflow.com/questions/9202224/getting-a-hidden-password-input
+
+	-NOTES-
+	Keybrid is written in Python3 and Batch for Windows.
+	Keybird is open source.
+	Developed by Andrew Vella
+	@PixelatedStarfish on Github and Itch
+	Copyright (c) 2022
+	Thank you for using Keybird!
+
+	'''
+	return s.replace("\t", "")
 
 #SYSTEM
 def copyToclipPC(txt):
@@ -615,16 +823,21 @@ def YesOrNo(s):
 
 #TESTING
 def test():
-	a = [("fox", "content"), ("dog", "content"), ("Zap", "content"), ("zap", "content"), ("app", "content"), ("#$%^", "content"), ("app", "content"), ("pen", "content"), ("war", "content")]
-	message = getRandMessage()
+	#a = [("fox", "content"), ("dog", "content"), ("Zap", "content"), ("zap", "content"), ("app", "content"), ("#$%^", "content"), ("app", "content"), ("pen", "content"), ("war", "content")]
+	#message = getRandMessage()
 
 	#tupleSortNoDupsTest(a)
 	#encrpytAndDecryptTest(message)
 	#openTextEditorTest()
 	#textColorTest()
+	#maskedInputTest()
 
 	print("All tests are completed.")
 	return
+
+def maskedInputTest():
+	d = pwinput.pwinput()
+	print(d)
 
 def getRandMessage():
 	M = ["We're on some kind of mission. We have an obligation. We have to wear toupees!", " You was doing PIPI in your pampers when i was beating players much more stronger then you! ... And \"w\"esley \"s\"o is nobody for me, just a player who are crying every single time when loosing, ( remember what you say about Firouzja ) !!!", "ThE QuIck BrOwN fOx JuMpEd OvEr ThE LaZy DoG", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Namespaces are one honking great idea -- let's do more of those!"]
@@ -698,10 +911,12 @@ print("Initializing.")
 #globals
 SAVE = False
 DEBUG = False
+MASK = True
 LINE = 50
 KEY_LENGTH = 16
 PASSWORD_LENGTH = 16
 ENCODING = "utf_8" 
+
 
 print("Loading Working Directory.")
 #set cwd to source file
@@ -718,36 +933,3 @@ except Exception:
 	if (DEBUG):
 		traceback.print_exc()
 	input("Error; press Return (Enter) to close.\n> ")
-
-'''
-KNOWN ISSUES
-	Right now this is vunerable to over the shoulder attacks. Need some way to obfuscate text, by manipulating colors or something else.
-	Powershell can handle colors, but it requires specific security clearances to use. Batch cannot handle colors
-
-SPECIAL KEYS
-	Note that a filename that begins with an underscore is reserved. Two underscores means hidden.
-	^ is newline
-	Edit mode now runs in nano, copy content to _temp and open it in nano. wsl is used to run nano in batch.
-
-SOURCES
-	Clear Screen
-	https://www.csestack.org/clear-python-interpreter-console/
-	
-	Copy to Clipboard
-	https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
-	
-	Encryption
-	https://www.geeksforgeeks.org/encoding-and-decoding-base64-strings-in-python/
-
-	Get Current Working Dir
-	https://note.nkmk.me/en/python-os-getcwd-chdir/
- 	
- 	License
- 	https://choosealicense.com/
-	
-	Nano
-	https://www.nano-editor.org/dist/latest/nano.html
-	
-	Text Color 
-	https://www.geeksforgeeks.org/print-colors-python-terminal/
-'''
