@@ -1,4 +1,3 @@
-
 -WELCOME TO KEYBIRD-
 You need lots of passwords, but making them is tedious. Repeating passwords reduces their effectiveness. In-browser
 managers are fine until they lock you out.
@@ -36,7 +35,7 @@ answers.
 
 Files:
 Files store passwords and keys. They are encrypted to prevent accidents. Files are cleaned at start up. They are
-alphabatized by key and duplicate info is deleted.
+alphabatized by key and duplicate info is deleted. Files can also be edited in the nano text editor.
 
 Settings:
 Toggle file saving
@@ -48,14 +47,29 @@ Use the repl when you leave this app at home. If you need a password quickly, us
 repl.
 
 
+-EDIT MODE (HOW TO USE NANO)-
+Nano is a text editor that runs on linux. It can also run on the Windows Linux Subsystem. Keybird uses nano to edit
+the (unencrypted) contents of a file. The File Edit Mode opens the nano text editor after writing unencrypted file
+contents to the file "_temp.txt". You can type "_help" into Edit Mode in the File Menu to load this section of the
+documentation into nano. Edits to this document will not be saved, so you can experiment freely.
+
+A short guide to shortcuts:
+^G  means "press ctrl and G at the same time to use this shortcut" you can also press esc twice and then G
+M-G means "press alt and G at the same time to use this shortcut"
+
+Note that G can be substituted for any letter to get another shortcut. You should see a list of them at the bottom of
+this window. ^X exits the nano editor and returns to Keybird. For more information use ^G.
+
+Upon finishing your edit and exiting, you will be asked if you want to save your edit. Type "yes" or "y" to save your
+edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
+the edit.
+
+
 -INSTALL WSL-
-#if you require the windows linux subsystem to run nano (a text editor)
-#run this script in batch
+#if you require the windows linux subsystem to run nano (the text editor used by Keybird)
+#run this command in Command Prompt by typing it in and pressing enter (return).
 
-echo WSL Installation
 wsl --install
-echo End of WSL Installation
-
 
 -GITHUB-
 https://github.com/PixelatedStarfish/Keybird-Password-Manager
@@ -129,61 +143,3 @@ Copyright (c) 2022
 @PixelatedStarfish on Github and Itch
 andyjvella@gmail.com
 Thank you for using Keybird!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
