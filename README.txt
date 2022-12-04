@@ -60,6 +60,13 @@ M-G means "press alt and G at the same time to use this shortcut"
 Note that G can be substituted for any letter to get another shortcut. You should see a list of them at the bottom of
 this window. ^X exits the nano editor and returns to Keybird. For more information use ^G.
 
+Important Operations:
+^G Help
+^X  Exit; go back to Keybird
+up and down arrowsScroll
+M-U:Undo
+M-E:Redo
+
 Upon finishing your edit and exiting, you will be asked if you want to save your edit. Type "yes" or "y" to save your
 edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
 the edit.
