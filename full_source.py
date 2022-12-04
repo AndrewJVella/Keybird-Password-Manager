@@ -6,8 +6,6 @@ import subprocess
 import sys
 import pwinput
 
-#closing nano with the red X leavs a .save file, these may need to be deleted from cwd
-
 #BASE MENU FUNCTIONS
 def main(d):
 
@@ -34,7 +32,8 @@ def main(d):
 		pass
 	print("Loading Settings.")
 	getSettings()
-	fileCleaner()
+	fileCleaner() #File cleaner text printed in this function
+	cleanNanoDroppings() #closing the app while nano is running leaves a .save file in src, this .save needs to be deleted
 	print("Ready.\n----")
 	menu()
 	return
@@ -558,6 +557,15 @@ def extractKeyFromLine(s):
 		return
 	return s.split("\t")[1]
 
+def cleanNanoDroppings():
+	l = os.listdir()
+	for i in l:
+		t = i.split(".") 
+		if (t[len(t)-1] == "save"):
+			os.remove(i)
+	return
+
+
 
 # Function to do selection sort on tuples in an array, by element 0 of each tuple (yes, On^2)
 def selectionSort(a):
@@ -600,6 +608,13 @@ M-G means "press alt and G at the same time to use this shortcut"
 
 Note that G can be substituted for any letter to get another shortcut. You should see a list of them at the bottom of
 this window. ^X exits the nano editor and returns to Keybird. For more information use ^G.
+
+Important Operations:
+^G 					Help
+^X  				Exit; go back to Keybird
+up and down arrows	Scroll
+M-U:				Undo
+M-E:				Redo
 
 Upon finishing your edit and exiting, you will be asked if you want to save your edit. Type "yes" or "y" to save your
 edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
@@ -756,26 +771,27 @@ def copyToclipMac(txt):
 
 def openTextEditorMode(path):
 	#if help is needed
-	if (path == "_help"):
-		f = open("Files/__helpEdit.txt", "w")
-		encrypt_to_file("Files/__helpEdit.txt", "-EDIT MODE HELP-\n\nYou can edit a file in nano. Select the file by typing its name into the prompt. The file will be decrypted and written to \"_temp.txt\" for editing. When you are done editing, you will be prompted to save your edit. If you type no, your file will be unchanged. If you type yes, your file will be overwritten with the edit and encrypted. You can edit this file as much as you like. Try things out! Your edit will not be saved to this file.\n\nHOW TO USE NANO SHORTCUTS:\n\n ^G indicates that the control key and the g key can be pressed to use the shortcut. (You can also push esc twice and then push G) ^ means 'Control and...'\nM- means 'alt and...' Push alt and a key at the  same time to use those.\n\nUse ^G for more help, and ^X to exit and return to the File Menu.")
-		path = "Files/__helpEdit.txt"
 	s = openNano(decrypt_file(path))
-	encrypt_to_file(path, s)
-	return
-
+	if (not path == "Files/_help.txt"):
+		encrypt_to_file(path, s)
+		return
+	encrypt_to_file(path, docs(False)) #overwrite any edits to the nano help docs
 
 def openNano(s):
 	#I'm going to do my own saving prompt 
 	f = open("_temp.txt", "w")
 	f.write(s)
 	f.close()
-	print("Writing File to Text Editor (Nano).")
+	clear()
+	print("*Loading Nano*")
+	print(docs(False))
+	print("*Loading Nano*")
 	subprocess.run(["wsl", "nano","_temp.txt", "-t"])
 	f = open("_temp.txt", "r")
 	n = f.read()
 	f.close()
 	os.remove("_temp.txt")
+	clear()
 	a = YesOrNo("Would you like to save your edit? (y/n)?\n>  ")
 	if (a):
 		s = n
@@ -816,7 +832,7 @@ def YesOrNo(s):
 	a = str(input(s) + "")
 	try:
 		return a.lstrip().lower()[0] == "y"
-	except TypeError: #no input given means no
+	except Exception: #no input given means no
 		return False
 
 #TESTING
@@ -829,8 +845,17 @@ def test():
 	#openTextEditorTest()
 	#textColorTest()
 	#maskedInputTest()
+	debugTest()
 
 	print("All tests are completed.")
+	return
+
+def debugTest():
+	print("---\nDEBUG MODE TEST\n---")
+	global DEBUG
+	DEBUG = True
+
+	d = 4 // 0
 	return
 
 def maskedInputTest():
@@ -927,7 +952,8 @@ except PermissionError:
 	input("Error; press Return (Enter) to close.\n> ")
 
 except Exception:
-	traceback.print_exc() #comment this line out for stable versions
+	#traceback.print_exc() #comment this line out for stable versions
 	if (DEBUG):
 		traceback.print_exc()
 	input("Error; press Return (Enter) to close.\n> ")
+	
