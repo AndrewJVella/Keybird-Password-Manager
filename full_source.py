@@ -622,6 +622,20 @@ the edit.
 	'''
 
 	s= '''
+-FIRST START UP-
+To download from Github select the zip file "Keybird Inside", click on it, then click "view raw".
+
+Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybrid and click
+start.bat. A dialouge box should pop up, click "Extract all" and save it to the Desktop. You will not have to
+extract it again. Open the Keybird directory again and click start. At this point, a blue box will appear that
+reads "Windows Protected Your PC", this is a rightly paranoid security mesasure to protect you from malware.
+I gave you my email and my source code (in src). You can decide what to do next.
+
+If you still want to try Keybird. You should click the underlined text "More Info", and then click run. A window
+will open and start running a shell. You may see some text for a short time as the app loads. Then you will see
+the main menu.
+
+You may need to install the Windows Linux Subsystem. A section on how to do that is included in this document.
 
 -WELCOME TO KEYBIRD-
 You need lots of passwords, but making them is tedious. Repeating passwords reduces their effectiveness. In-browser
@@ -743,8 +757,35 @@ https://www.nano-editor.org/dist/latest/nano.html
 Password Masking 
 https://stackoverflow.com/questions/9202224/getting-a-hidden-password-input
 
+-ERRORS AND DEBUG MODE-
+Errors happen, and a well designed program can handle them fairly well There are two kinds of errors that Keybird is
+designed to handle:
+
+A Permisson Error - these occur when Keybird attempts to modify a file that is open or in use.
+A General Error   - these occur when Keybird functions incorrectly.
+
+Errors are reported in Python3 as tracebacks through the call stack. The line number and function in source are shown
+as well as the type of of error that occured. Sometimes errors occur while an error is being handled, in this case a
+message will indicate as such, and more information will be printed.
+
+In typical use the traceback will not printed. You will be given a prompt that indicates an error has occured and
+you can close the app by pressing enter (return). If you would like to see debug information, run Keybird in 
+DEBUG mode, which can be toggled on and in the Settings menu.
+
+You are certianly welcome to reach out to me regarding an error in Keybird. I would appreciate your time.
+You can reach out by email, Github, or Itch.
+
+To email me, please use the subject line "Keybird Error Report" tell me about what happened and what you were
+doing when the error occured. You can include the traceback if you have one. I will try to reproduce the error
+in a test and attempt to debug it. I will reply to you and update the Github and Itch pages. Programs and apps
+need maintenance over time. Python, batch, and your operating system will be updated and changed over time.
+
+Please be kind to me in your emails and other communications. I am a person, and I want to be treated like one.
+I do not take responsibility for damages or inconveniences that result from the use of Keybird. That is what
+the legal section is for, after all. I hope you find Keybird useful, simple, and enjoyable. Good luck!
+
 -NOTES-
-Keybrid is written in Python3 and Batch for Windows.
+Keybird is written in Python3 and Batch for Windows.
 Keybird is open source.
 Developed by Andrew Vella
 Copyright (c) 2022
@@ -911,6 +952,7 @@ def randomSampleFile(kOne):
 			kTwo = randomKey() #for testing alphabetical sort and duplicate key deletion in the file cleaner
 		r = (genResult(kOne, kTwo))
 		saveTkToFile(kOne, kTwo, r)
+
 def randomKey():
 	SAMPLE_KEYS = '''
 	Ray Charles Bille Holiday Evelyn Frank Apple Bananna Xavier Huzzah Test Java Mocha Cobra Pear
@@ -924,6 +966,8 @@ def randomKey():
 	Dec Non Hex Sep Bi Mono Queer Peace On Earth Mercy Xmas Angels Chickens Hello World Good Goodbye Bye Buy
 	Gifts Dog Cat Mouse Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune Pluto Asteroid Star Space Corn
 	Supreme Deluxe Alpha Bravo Charlie Delta Epsilon Foxtrot Golf Hotel Indigo Juliet Kilo Lima Bean Passant
+	Roof Tooth Hand Foot Mourning Dove Chick Raptor Claw Talon Qwerty Typewriter Type Writer Pan Pot Handle
+	Brush Blush Breath Birth Ear Dear Clear Cheer Razor Candy Goth Morse Horse Bikes Likes Calmed Palmed Up
 	'''.replace("\n", "").split(" ")
 
 	return SAMPLE_KEYS[random.randint(0, len(SAMPLE_KEYS) -1 )].replace("\t", "")
@@ -940,7 +984,6 @@ KEY_LENGTH = 16
 PASSWORD_LENGTH = 16
 ENCODING = "utf_8" 
 
-
 print("Loading Working Directory.")
 #set cwd to source file
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -950,10 +993,8 @@ try:
 except PermissionError:
 	print("Access denied. Files may need to be closed in another application first.")
 	input("Error; press Return (Enter) to close.\n> ")
-
+	
 except Exception:
-	#traceback.print_exc() #comment this line out for stable versions
 	if (DEBUG):
 		traceback.print_exc()
 	input("Error; press Return (Enter) to close.\n> ")
-	
