@@ -1,7 +1,7 @@
 -FIRST START UP-
 To download from Github select the zip file "Keybird Inside", click on it, then click "view raw".
 
-Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybrid and click
+Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybird and click
 start.bat. A dialouge box should pop up, click "Extract all" and save it to the Desktop. You will not have to
 extract it again. Open the Keybird directory again and click start. At this point, a blue box will appear that
 reads "Windows Protected Your PC", this is a rightly paranoid security mesasure to protect you from malware.
