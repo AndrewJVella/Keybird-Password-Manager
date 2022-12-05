@@ -1,10 +1,10 @@
 -FIRST START UP-
 To download from Github select the zip file "Keybird Inside", click on it, then click "view raw".
 
-Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybird and click
-start.bat. A dialouge box should pop up, click "Extract all" and save it to the Desktop. You will not have to
+Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybrid and click
+start.bat. A dialogue box should pop up, click "Extract all" and save it to the Desktop. You will not have to
 extract it again. Open the Keybird directory again and click start. At this point, a blue box will appear that
-reads "Windows Protected Your PC", this is a rightly paranoid security mesasure to protect you from malware.
+reads "Windows Protected Your PC", this is a rightly paranoid security measure to protect you from malware.
 I gave you my email and my source code (in src). You can decide what to do next.
 
 If you still want to try Keybird. You should click the underlined text "More Info", and then click run. A window
@@ -30,19 +30,19 @@ specific browser to access your stuff. At best you might still use a small numbe
 the important stuff, which puts the important stuff at risk.
 
 My thinking is that 100 auto-generated passwords is bad, a small number of manually created passwords is worse, and
-both of these together is what often happens. Instead of coming up with a few compilcated passwords and using them
+both of these together is what often happens. Instead of coming up with a few complicated passwords and using them
 everywhere, depending on a browser extension, or (most likely) both. You can use Keybird to generate secure
 passwords from simple keys, that are easy to create and remember.
 
 -FEATURES-
 Keys:
-This app uses keys to make passwords. The keys are easy to remeber. The passwords are secure.
+This app uses keys to make passwords. The keys are easy to remember. The passwords are secure.
 Keys are 16 characters max.
 Passwords are 16 characters.
 
 Two Key Mode:
 Keybird has a Two Key Mode. One private key and many public keys. The public keys can be website names. You can have
-many passwords and you only need to remeber one key.
+many passwords and you only need to remember one key.
 
 Username Generator:
 The Username Generator helps you think of usernames. It asks you three questions, and generates names from your
@@ -50,7 +50,7 @@ answers.
 
 Files:
 Files store passwords and keys. They are encrypted to prevent accidents. Files are cleaned at start up. They are
-alphabatized by key and duplicate info is deleted. Files can also be edited in the nano text editor.
+alphabetized by key and duplicate info is deleted. Files can also be edited in the nano text editor.
 
 Settings:
 Toggle file saving
@@ -60,7 +60,6 @@ Toggle debug mode, which prints errors.
 Web Repl:
 Use the repl when you leave this app at home. If you need a password quickly, use your key. Nothing is saved on the
 repl.
-
 
 -EDIT MODE (HOW TO USE NANO)-
 Nano is a text editor that runs on linux. It can also run on the Windows Linux Subsystem. Keybird uses nano to edit
@@ -117,8 +116,8 @@ Disclaimer:
 So, in plain terms, this app should be used with some care. It is about as secure as a basket of keys. If you keep it
 behind a locked door, your keys should stay put because only trusted people get anywhere near them. By analogy this
 app is the basket, and your computer is the door. You should be sure that your computer is secured and safe before
-using this app. No information produced in whole or part by this app is garenteed to be perfectly safe. Your files
-can be read, modified, or deleted. The app source code can also be read, modfied, or deleted, which would cause
+using this app. No information produced in whole or part by this app is guaranteed to be perfectly safe. Your files
+can be read, modified, or deleted. The app source code can also be read, modified, or deleted, which would cause
 unpredictable effects while running the app. Back up important things; store your passwords in a few safe places.
 Keep untrustworthy people off your computer. Do not store your passwords publicly, or generate them with keys
 that are easy to guess. Stay safe!
@@ -161,22 +160,24 @@ https://stackoverflow.com/questions/9202224/getting-a-hidden-password-input
 Errors happen, and a well designed program can handle them fairly well There are two kinds of errors that Keybird is
 designed to handle:
 
-A Permisson Error - these occur when Keybird attempts to modify a file that is open or in use.
+A Permission Error - these occur when Keybird attempts to modify a file that is open or in use.
 A General Error   - these occur when Keybird functions incorrectly.
 
 Errors are reported in Python3 as tracebacks through the call stack. The line number and function in source are shown
-as well as the type of of error that occured. Sometimes errors occur while an error is being handled, in this case a
+as well as the type of of error that occurred. Sometimes errors occur while an error is being handled, in this case a
 message will indicate as such, and more information will be printed.
 
-In typical use the traceback will not printed. You will be given a prompt that indicates an error has occured and
+In typical use the traceback will not be printed. You will be given a prompt that indicates an error has occurred and
 you can close the app by pressing enter (return). If you would like to see debug information, run Keybird in
-DEBUG mode, which can be toggled on and in the Settings menu.
+DEBUG mode, which can be toggled on and in the Settings menu. If DEBUG mode is off, you can still type "debug",
+"traceback", or "report" to get the debug info. That said, I want to keep the error message as simple as I can, to
+prevent needless confusion. No one wants to see a wall of text when they are trying to understand what just happened!
 
-You are certianly welcome to reach out to me regarding an error in Keybird. I would appreciate your time.
+You are certainly welcome to reach out to me regarding an error in Keybird. I would appreciate your time.
 You can reach out by email, Github, or Itch.
 
 To email me, please use the subject line "Keybird Error Report" tell me about what happened and what you were
-doing when the error occured. You can include the traceback if you have one. I will try to reproduce the error
+doing when the error occurred. You can include the traceback if you have one. I will try to reproduce the error
 in a test and attempt to debug it. I will reply to you and update the Github and Itch pages. Programs and apps
 need maintenance over time. Python, batch, and your operating system will be updated and changed over time.
 
@@ -187,6 +188,7 @@ the legal section is for, after all. I hope you find Keybird useful, simple, and
 -NOTES-
 Keybird is written in Python3 and Batch for Windows.
 Keybird is open source.
+Version 2.3.0
 Developed by Andrew Vella
 Copyright (c) 2022
 @PixelatedStarfish on Github and Itch
