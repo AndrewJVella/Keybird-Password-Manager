@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import random
 import traceback
 import os
@@ -7,6 +8,7 @@ import sys
 import pwinput
 
 #BASE MENU FUNCTIONS
+	#dinput() "dark input" is a function that maps asdfghjkl to 012345678 so you can use this app in the dark without touching function keys
 def main(d):
 
 	print("Loading Files.")
@@ -27,7 +29,7 @@ def main(d):
 	try:
 		global KEY_LENGTH
 		global PASSWORD_LENGTH
-		encrypt_to_file("Files/_help.txt", docs(False)) #get the Nano section of the docs only
+		encrypt_to_file("Files/_help.txt", docs("nano")) #get the Nano section of the docs only
 	except Exception:
 		pass
 	print("Loading Settings.")
@@ -68,10 +70,11 @@ def getSettings():
 	return
 
 def menu():
+	global VERSION
 	clear()
 	while (True):
-		print("Thank you for using the Keybird Password Manager.\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.")
-		a = input("\nType a number and press enter (return) to select an option:\n0  Help\n1  One Key Mode\n2  Two Key Mode\n3  Username Generator\n4  File Menu\n5  Settings Menu\n6  Disclaimer and License\n7  Erase Data\n8  Close\n> ")
+		print("Thank you for using the Keybird Password Manager.\nVersion " +VERSION+ "\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.")
+		a = dinput("\nType a number and press enter (return) to select an option:\n0  Help\n1  One Key Mode\n2  Two Key Mode\n3  Username Generator\n4  File Menu\n5  Settings Menu\n6  Disclaimer and License\n7  Erase Data\n8  Close\n> ")
 		if (a == "-1"):
 			test()
 		if (a == "-2"):
@@ -95,10 +98,8 @@ def menu():
 			SettingsMenu("SettingsMenu")
 		if (a == "6"):
 			clear()
-			print("Disclaimer\n")
-			print(paragraphAlign("So, in plain terms, this app should be used with some care. It is about as secure as a basket of keys. If you keep it behind a locked door, your keys should stay put because only trusted people get anywhere near them. By analogy this app is the basket, and your computer is the door. You should be sure that your computer is secured and safe before using this app. No information produced in whole or part by this app is garenteed to be perfectly safe. Your files can be read, modified, or deleted. The app source code can also be read, modfied, or deleted, which would cause unpredictable effects while running the app. Back up important things; store your passwords in a few safe places. Keep untrustworthy people off your computer. Do not store your passwords publicly, or generate them with keys that are easy to guess. Stay safe!"))
-			print("\n\n")
-			print(paragraphAlign('MIT License^^Copyright (c) 2022 Andrew Vella^^Permission is hereby granted, free of charge, to any person obtaining a copy^of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:^^The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.^^THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR^IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,^FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER^LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'))
+			print(docs("legal"))
+			
 		if (a == "7"):
 			clear()
 			h = YesOrNo("Erase all data and close? (y/n). This will end thr current session.\n")
@@ -140,7 +141,6 @@ def twoKey():
 		print("\nResult:\n" + ("*" * PASSWORD_LENGTH) + "\n")
 	if (not MASK):
 		print("\nResult:\n" + r + "\n")
-
 	copyToclipPC(r)
 	if (SAVE):
 		saveTkToFile(kOne, kTwo, r)
@@ -149,7 +149,6 @@ def twoKey():
 def oneKey():
 	global MASK
 	kOne = ""
-
 	clear()
 	print("\nGive a Key, such as a word you will remember. Be sure it is not easily guessed:\n")
 	if (MASK):
@@ -234,7 +233,6 @@ def saveTkToFile(kOne, kTwo, r):
 
 def saveOkToFile(kOne, r):
 	
-	#this used to ask to save. Now it is a setting.
 	h = 'y'
 	if (h[0].lower().lstrip() == 'y'):
 		content = "Key:\t\t" + kOne + "\nPassword:\t" + r + "\n"
@@ -289,7 +287,8 @@ def genUserName():
 		nameList.remove(nameList[r])
 		i = i - 1
 
-	#display outlist and prompt for number to select, if the selection is not in the list, run again, copy selection to clipboard and return
+	#Display outlist and prompt for number to select.
+	#If the selection is not in the list, run again, copy selection to clipboard and return
 
 	i = 0 #again, a different i
 	print("\nUsernames:")
@@ -314,10 +313,11 @@ def SettingsMenu(a):
 			print ("2  Masking          (" + menuBooleanFormatter(MASK) + ")")
 			print ("3  Debug Mode       (" + menuBooleanFormatter(DEBUG) + ")")
 			print ("4  Retore Defaults\n5  Back to Main Menu\n6  Close")
-			b = input("> ")
+			b = dinput("> ")
 			if (not a == "5"):
 				SettingsMenu(b)
 			menu()
+
 		if (a == "0"):
 			print ("1  Toggle the option to save to a file.")
 			print ("2  Toggle the option to mask passwords.")
@@ -352,7 +352,6 @@ def SettingsMenu(a):
 			if (SAVE and MASK and  DEBUG):
 				o = "111"
 			
-		
 			f = open("Files/__Settings.txt", "w") 
 			f.write(o) 
 			f.close()
@@ -373,7 +372,7 @@ def SettingsMenu(a):
 	return  
 
 def FileMenu(a):
-	while (not a == "5"):
+	while (not a == "6"):
 		global SAVE
 		global DEBUG
 		global MASK
@@ -382,9 +381,9 @@ def FileMenu(a):
 			if (MASK):
 				print ("\n*Please note that all text in this menu is not masked or hidden. All file content will be plainly visible.*")
 
-			print("Files Menu\n\n0  Help\n1  List Files\n2  Read File\n3  Edit File\n4  Delete File\n5  Back to Main Menu\n6  Close.")
-			b = input("> ")
-			if (not a == "5"):
+			print("Files Menu\n\n0  Help\n1  List Files\n2  Read File\n3  Edit File\n4  Delete File\n5  Clean Files\n6  Back to Main Menu\n7  Close.")
+			b = dinput("> ")
+			if (not a == "6"):
 				FileMenu(b)
 			menu()
 		if (a == "0"):
@@ -392,12 +391,13 @@ def FileMenu(a):
 			print ("2  Read the contents of a file.")
 			print ("3  Edit a file. For help, type '_help' at the prompt.")
 			print ("4  Permenantly erase a file. (Be sure it is not in use.)")
-			print ("5  Return to the Main Menu.")
-			print ("6  End Session.")
+			print ("5  Run the File Cleaner, organize keys.")
+			print ("6  Return to the Main Menu.")
+			print ("7  End Session.")
 
 		if (a == "1"):
 			printFileList()
-		if (a == "6"):
+		if (a == "7"):
 			exit()
 		if (a == "2"):
 			print(decrypt_file("Files/" +fileSelector()))
@@ -406,6 +406,9 @@ def FileMenu(a):
 		if (a == "4"):
 			os.remove("Files/" +fileSelector())
 			print("Deleted.\n")
+		if (a == "5"):
+			fileCleaner()
+			print("Done")
 		input("Press Return (Enter) to return to the Files Menu.\n> ")
 		a = "FileMenu"
 	return 
@@ -448,7 +451,7 @@ def printFileList():
 			print(i)
 	return
 
-###FORMATTING THAT ACTUALLY COOPERATES###
+#FORMATTING
 def paragraphAlign(s): #for large strings
 	# ^ is newline
 
@@ -515,7 +518,6 @@ def reverse(s):
 	return out
 
 #ORG
-
 def fileCleaner():
 	print("Running the File Cleaner")
 	l = getFileList()
@@ -526,6 +528,7 @@ def fileCleaner():
 	l.append("_oneKey.txt")
 	
 	for i in l:
+		print("Cleaning " + i)
 		path = "Files/" + i
 		s = decrypt_file(path)
 		Parts = s.split("\n\n") 
@@ -545,11 +548,13 @@ def fileCleaner():
 		tuples = removeDuplicates(selectionSort(Tuples)) #do the cleaning 
 
 		#convert tuples into file content
-		encryptable = ""
+		encryptable = "" #file content before encrpytion as a string
 		for i in range(0, len(tuples) - 1):
 			encryptable += tuples[i][1] + "\n\n"
 		encryptable += tuples[len(tuples) - 1][1]
+		encryptable = encryptable.replace("\n\n\n", "\n\n") #triple newlines appear for some reason, have a bandaid!
 		encrypt_to_file(path, encryptable)
+		
 	return 
 
 def extractKeyFromLine(s):
@@ -593,8 +598,37 @@ def removeDuplicates(a):
 	return out
 
 #DOCS
-def docs(b = True):
-	# b allows for the printing of the entire doc, or just the nano section (b = False). When you type _help into edit mode, only the nano section should be loaded into nano in order to save time. 
+def docs(b = "all"):
+	legal = '''
+-LEGAL-
+Disclaimer:
+No information produced in whole or part by this app is guaranteed to be perfectly safe. Your files
+can be read, modified, or deleted. The app source code can also be read, modified, or deleted, which would cause
+unpredictable effects while running the app. Back up important things; store your passwords in a few safe places.
+Keep untrustworthy people off your computer. Do not store your passwords publicly, or generate them with keys
+that are easy to guess. Stay safe!
+
+No birds were harmed in the making of Keybird, including the program, online material, documentation, and photography. 
+Wild robin were photographed eating berries from a park tree.
+
+License:
+MIT License
+
+Copyright (c) 2022 Andrew Vella
+
+Permission is hereby granted, free of charge, to any person obtaining  a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+			''' 
 	nano = '''
 -EDIT MODE (HOW TO USE NANO)-
 Nano is a text editor that runs on linux. It can also run on the Windows Linux Subsystem. Keybird uses nano to edit
@@ -620,15 +654,14 @@ Upon finishing your edit and exiting, you will be asked if you want to save your
 edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
 the edit. 
 	'''
-
 	s= '''
 -FIRST START UP-
 To download from Github select the zip file "Keybird Inside", click on it, then click "view raw".
 
 Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybrid and click
-start.bat. A dialouge box should pop up, click "Extract all" and save it to the Desktop. You will not have to
+start.bat. A dialogue box should pop up, click "Extract all" and save it to the Desktop. You will not have to
 extract it again. Open the Keybird directory again and click start. At this point, a blue box will appear that
-reads "Windows Protected Your PC", this is a rightly paranoid security mesasure to protect you from malware.
+reads "Windows Protected Your PC", this is a rightly paranoid security measure to protect you from malware.
 I gave you my email and my source code (in src). You can decide what to do next.
 
 If you still want to try Keybird. You should click the underlined text "More Info", and then click run. A window
@@ -639,42 +672,42 @@ You may need to install the Windows Linux Subsystem. A section on how to do that
 
 -WELCOME TO KEYBIRD-
 You need lots of passwords, but making them is tedious. Repeating passwords reduces their effectiveness. In-browser
-managers are fine until they lock you out. 
+managers are fine until they lock you out.
 
-You may ask yourself: 
+You may ask yourself:
 "What was my password again?"
-"Why does Safari fill in the wrong info?" 
+"Why does Safari fill in the wrong info?"
 "Did I make this account on Google?"
-	
+
 Skip that nonsense, use Keybird.
 
 Keybird is designed to generate and store passwords on your computer. While other managers integrate with your browser,
-they are much better for accumulating passwords than actually managing them. At worst you can become dependant on a 
-specific browser to access your stuff. At best you might still use a small number of passwords you wrote yourself for 
+they are much better for accumulating passwords than actually managing them. At worst you can become dependant on a
+specific browser to access your stuff. At best you might still use a small number of passwords you wrote yourself for
 the important stuff, which puts the important stuff at risk.
 
 My thinking is that 100 auto-generated passwords is bad, a small number of manually created passwords is worse, and
-both of these together is what often happens. Instead of coming up with a few compilcated passwords and using them
-everywhere, depending on a browser extension, or (most likely) both. You can use Keybird to generate secure 
+both of these together is what often happens. Instead of coming up with a few complicated passwords and using them
+everywhere, depending on a browser extension, or (most likely) both. You can use Keybird to generate secure
 passwords from simple keys, that are easy to create and remember.
 
 -FEATURES-
 Keys:
-This app uses keys to make passwords. The keys are easy to remeber. The passwords are secure. 
-Keys are 16 characters max. 
+This app uses keys to make passwords. The keys are easy to remember. The passwords are secure.
+Keys are 16 characters max.
 Passwords are 16 characters.
 
 Two Key Mode:
 Keybird has a Two Key Mode. One private key and many public keys. The public keys can be website names. You can have
-many passwords and you only need to remeber one key.
+many passwords and you only need to remember one key.
 
 Username Generator:
 The Username Generator helps you think of usernames. It asks you three questions, and generates names from your
 answers.
 
 Files:
-Files store passwords and keys. They are encrypted to prevent accidents. Files are cleaned at start up. They are 
-alphabatized by key and duplicate info is deleted. Files can also be edited in the nano text editor.
+Files store passwords and keys. They are encrypted to prevent accidents. Files are cleaned at start up. They are
+alphabetized by key and duplicate info is deleted. Files can also be edited in the nano text editor.
 
 Settings:
 Toggle file saving
@@ -683,12 +716,9 @@ Toggle debug mode, which prints errors.
 
 Web Repl:
 Use the repl when you leave this app at home. If you need a password quickly, use your key. Nothing is saved on the
-repl.
-
-''' + nano + '''
-
+repl.\n'''+ nano +'''
 -INSTALL WSL-
-#if you require the windows linux subsystem to run nano (the text editor used by Keybird) 
+#if you require the windows linux subsystem to run nano (the text editor used by Keybird)
 #run this command in Command Prompt by typing it in and pressing enter (return).
 
 wsl --install
@@ -700,7 +730,7 @@ https://github.com/PixelatedStarfish/Keybird-Password-Manager
 tinyurl.com/KeybirdWeb
 
 -INDICATORS-
-Note that a filename that begins with an underscore is reserved. 
+Note that a filename that begins with an underscore is reserved.
 Two underscores means the file is hidden.
 > Indicates input
 >> Masked input
@@ -712,35 +742,7 @@ At the main menu select the following:
 -2 to run the file cleaner
 -3 to generate sample files
 
--LEGAL-
-Disclaimer:
-So, in plain terms, this app should be used with some care. It is about as secure as a basket of keys. If you keep it
-behind a locked door, your keys should stay put because only trusted people get anywhere near them. By analogy this 
-app is the basket, and your computer is the door. You should be sure that your computer is secured and safe before 
-using this app. No information produced in whole or part by this app is garenteed to be perfectly safe. Your files 
-can be read, modified, or deleted. The app source code can also be read, modfied, or deleted, which would cause 
-unpredictable effects while running the app. Back up important things; store your passwords in a few safe places. 
-Keep untrustworthy people off your computer. Do not store your passwords publicly, or generate them with keys 
-that are easy to guess. Stay safe!
-
-License:
-MIT License
-
-Copyright (c) 2022 Andrew Vella
-
-Permission is hereby granted, free of charge, to any person obtaining  a copy of this software and associated
-documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
-rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
-persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
-Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
-WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
-OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+	''' + legal + '''
 -SOURCES-
 Clear Screen
 https://www.csestack.org/clear-python-interpreter-console/
@@ -754,29 +756,31 @@ License
 https://choosealicense.com/
 Nano
 https://www.nano-editor.org/dist/latest/nano.html
-Password Masking 
+Password Masking
 https://stackoverflow.com/questions/9202224/getting-a-hidden-password-input
 
 -ERRORS AND DEBUG MODE-
 Errors happen, and a well designed program can handle them fairly well There are two kinds of errors that Keybird is
 designed to handle:
 
-A Permisson Error - these occur when Keybird attempts to modify a file that is open or in use.
-A General Error   - these occur when Keybird functions incorrectly.
+A Permission Error - these occur when Keybird attempts to modify a file that is open or in use.
+A General Error    - these occur when Keybird functions incorrectly.
 
 Errors are reported in Python3 as tracebacks through the call stack. The line number and function in source are shown
-as well as the type of of error that occured. Sometimes errors occur while an error is being handled, in this case a
+as well as the type of of error that occurred. Sometimes errors occur while an error is being handled, in this case a
 message will indicate as such, and more information will be printed.
 
-In typical use the traceback will not printed. You will be given a prompt that indicates an error has occured and
-you can close the app by pressing enter (return). If you would like to see debug information, run Keybird in 
-DEBUG mode, which can be toggled on and in the Settings menu.
+In typical use the traceback will not be printed. You will be given a prompt that indicates an error has occurred and
+you can close the app by pressing enter (return). If you would like to see debug information, run Keybird in
+DEBUG mode, which can be toggled on and in the Settings menu. If DEBUG mode is off, you can still type "debug", 
+"traceback", or "report" to get the debug info. That said, I want to keep the error message as simple as I can, to
+prevent needless confusion. No one wants to see a wall of text when they are trying to understand what just happened! 
 
-You are certianly welcome to reach out to me regarding an error in Keybird. I would appreciate your time.
+You are certainly welcome to reach out to me regarding an error in Keybird. I would appreciate your time.
 You can reach out by email, Github, or Itch.
 
 To email me, please use the subject line "Keybird Error Report" tell me about what happened and what you were
-doing when the error occured. You can include the traceback if you have one. I will try to reproduce the error
+doing when the error occurred. You can include the traceback if you have one. I will try to reproduce the error
 in a test and attempt to debug it. I will reply to you and update the Github and Itch pages. Programs and apps
 need maintenance over time. Python, batch, and your operating system will be updated and changed over time.
 
@@ -786,17 +790,21 @@ the legal section is for, after all. I hope you find Keybird useful, simple, and
 
 -NOTES-
 Keybird is written in Python3 and Batch for Windows.
-Keybird is open source.
+Keybird is open source.\nVersion ''' + VERSION + '''
 Developed by Andrew Vella
 Copyright (c) 2022
-@PixelatedStarfish on Github and Itch
-andyjvella@gmail.com
-Thank you for using Keybird!
+	@PixelatedStarfish on Github and Itch
+	andyjvella@gmail.com
+	Thank you for using Keybird!
 	'''
-	if (b):
+
+	if (b == "all"):
 		return s.replace("\t", "")
-	if(not b):
+	if(b == "legal"):
+		return legal.replace("\t", "")
+	if(b == "nano"):
 		return nano.replace("\t", "")
+	return None
 
 
 #SYSTEM
@@ -816,7 +824,7 @@ def openTextEditorMode(path):
 	if (not path == "Files/_help.txt"):
 		encrypt_to_file(path, s)
 		return
-	encrypt_to_file(path, docs(False)) #overwrite any edits to the nano help docs
+	encrypt_to_file(path, docs("nano")) #overwrite any edits to the nano help docs
 
 def openNano(s):
 	#I'm going to do my own saving prompt 
@@ -825,7 +833,7 @@ def openNano(s):
 	f.close()
 	clear()
 	print("*Loading Nano*")
-	print(docs(False))
+	print(docs("nano"))
 	print("*Loading Nano*")
 	subprocess.run(["wsl", "nano","_temp.txt", "-t"])
 	f = open("_temp.txt", "r")
@@ -837,7 +845,7 @@ def openNano(s):
 	if (a):
 		s = n
 		print("Saved.")
-	if (a):
+	if (not a):
 		print("Cancelled.")
 
 	return s
@@ -876,17 +884,34 @@ def YesOrNo(s):
 	except Exception: #no input given means no
 		return False
 
+def dinput(s):
+	#in the dark, you can still use the home row instead of groping for numbers and hitting function keys
+	a = input(s)
+
+	if (a == "a"):
+		a = "0"
+	if (a == "s"):
+		a = "1"
+	if (a == "d"):
+		a = "2"
+	if (a == "f"):
+		a = "3"
+	if (a == "g"):
+		a = "4"
+	if (a == "h"):
+		a = "5"
+	if (a == "j"):
+		a = "6"
+	if (a == "k"):
+		a = "7"
+	if (a == "l"):
+		a = "8"
+	return a
+
 #TESTING
 def test():
 	#a = [("fox", "content"), ("dog", "content"), ("Zap", "content"), ("zap", "content"), ("app", "content"), ("#$%^", "content"), ("app", "content"), ("pen", "content"), ("war", "content")]
 	#message = getRandMessage()
-
-	#tupleSortNoDupsTest(a)
-	#encrpytAndDecryptTest(message)
-	#openTextEditorTest()
-	#textColorTest()
-	#maskedInputTest()
-	debugTest()
 
 	print("All tests are completed.")
 	return
@@ -956,10 +981,10 @@ def randomSampleFile(kOne):
 def randomKey():
 	SAMPLE_KEYS = '''
 	Ray Charles Bille Holiday Evelyn Frank Apple Bananna Xavier Huzzah Test Java Mocha Cobra Pear
-	Alto Soprano Tenor Tom Seven Robert Micheals Marty Dan Miller Beller Quote Cabbage Dessert Futon
-	Pixelated Starfish Vella Cash Jones App Keybasket Key Lock Thread Race Condition Skidmore Echo 
-	Quarter Dime Dollar Euro Swan Lion Donkey Dank Dusk Dawn Sun Moon Phone Light Dark Kiss Touch Hug
-	Caress Shirt Pants Belt Socks Shoes Wolf Lana Del John Lennon Ampersand Third Amendment Linnel Pi
+	Alto Soprano Tenor Tom Seven Robert Micheals Marty Dan Miller Beller Quote Cabbage Dessert Futon Big
+	Pixelated Starfish Vella Cash Jones App Keybasket Key Lock Thread Race Condition Skidmore Echo Jolly
+	Quarter Dime Dollar Euro Swan Lion Donkey Dank Dusk Dawn Sun Moon Phone Light Dark Kiss Touch Hug Pie
+	Caress Shirt Pants Belt Socks Shoes Wolf Lana Del John Lennon Ampersand Third Amendment Linnel Pi Tau
 	Flansy Question Mark Cola Simon Scallop Zap Pow Bang Woosh Brush Your Teeth Eat Food Live Laugh Tau En
 	Love Ball Small Call Tall Tufted Titmouse Cardinal Chickadee Blue Jay Yellow Green Purple Tea For Sigma
 	Two Three Art Tatum Channel Soda Milk Orange Juice Ice King Queen Duke Jack Rook Pawn Bishop Castle Oct
@@ -983,6 +1008,7 @@ LINE = 100
 KEY_LENGTH = 16
 PASSWORD_LENGTH = 16
 ENCODING = "utf_8" 
+VERSION = "2.3.0" #Keybasket 2.0
 
 print("Loading Working Directory.")
 #set cwd to source file
@@ -997,4 +1023,8 @@ except PermissionError:
 except Exception:
 	if (DEBUG):
 		traceback.print_exc()
-	input("Error; press Return (Enter) to close.\n> ")
+	d = input("Error; press Return (Enter) to close.\n> ")
+	if (d.lower().lstrip() == "debug" or d.lower().lstrip() == "traceback" or d.lower().lstrip() == "report"):
+		traceback.print_exc()
+#debug mode and this, why not? I do not want anyone to type "debug" if they do not know what that means. 
+#Extra confusion is not needed or helpful
