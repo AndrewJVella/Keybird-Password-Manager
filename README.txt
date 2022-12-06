@@ -85,7 +85,6 @@ Upon finishing your edit and exiting, you will be asked if you want to save your
 edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
 the edit.
 
-
 -INSTALL WSL-
 #if you require the windows linux subsystem to run nano (the text editor used by Keybird)
 #run this command in Command Prompt by typing it in and pressing enter (return).
@@ -111,16 +110,17 @@ At the main menu select the following:
 -2 to run the file cleaner
 -3 to generate sample files
 
+
 -LEGAL-
 Disclaimer:
-So, in plain terms, this app should be used with some care. It is about as secure as a basket of keys. If you keep it
-behind a locked door, your keys should stay put because only trusted people get anywhere near them. By analogy this
-app is the basket, and your computer is the door. You should be sure that your computer is secured and safe before
-using this app. No information produced in whole or part by this app is guaranteed to be perfectly safe. Your files
+No information produced in whole or part by this app is guaranteed to be perfectly safe. Your files
 can be read, modified, or deleted. The app source code can also be read, modified, or deleted, which would cause
 unpredictable effects while running the app. Back up important things; store your passwords in a few safe places.
 Keep untrustworthy people off your computer. Do not store your passwords publicly, or generate them with keys
 that are easy to guess. Stay safe!
+
+No birds were harmed in the making of Keybird, including the program, online material, documentation, and photography.
+Wild robin were photographed eating berries from a park tree.
 
 License:
 MIT License
@@ -161,7 +161,7 @@ Errors happen, and a well designed program can handle them fairly well There are
 designed to handle:
 
 A Permission Error - these occur when Keybird attempts to modify a file that is open or in use.
-A General Error   - these occur when Keybird functions incorrectly.
+A General Error    - these occur when Keybird functions incorrectly.
 
 Errors are reported in Python3 as tracebacks through the call stack. The line number and function in source are shown
 as well as the type of of error that occurred. Sometimes errors occur while an error is being handled, in this case a
