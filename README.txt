@@ -14,6 +14,7 @@ the main menu.
 You may need to install the Windows Linux Subsystem. A section on how to do that is included in this document.
 
 -WELCOME TO KEYBIRD-
+The purpose of Keybird is to improve the accessibility of password managers without compromising security.
 You need lots of passwords, but making them is tedious. Repeating passwords reduces their effectiveness. In-browser
 managers are fine until they lock you out.
 
@@ -35,6 +36,12 @@ everywhere, depending on a browser extension, or (most likely) both. You can use
 passwords from simple keys, that are easy to create and remember.
 
 -FEATURES-
+Accessibility:
+To prevent flashing lights, loading screens cannot update within the span of one third of a second.
+Also updates to a process, such as modifying files, also cannot update within the span of one third of a second.
+The a, s, d, f, g, h, j, k, and l keys map to 0 through 8. So you can use Keybird in the dark without issue.
+(Note that an update is text printed to the screen.)
+
 Keys:
 This app uses keys to make passwords. The keys are easy to remember. The passwords are secure.
 Keys are 16 characters max.
@@ -120,7 +127,7 @@ Keep untrustworthy people off your computer. Do not store your passwords publicl
 that are easy to guess. Stay safe!
 
 No birds were harmed in the making of Keybird, including the program, online material, documentation, and photography.
-Wild robin were photographed eating berries from a park tree.
+Wild robins were photographed eating berries from a park tree.
 
 License:
 MIT License
@@ -147,6 +154,8 @@ Copy to Clipboard
 https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
 Encryption
 https://www.geeksforgeeks.org/encoding-and-decoding-base64-strings-in-python/
+Flashing Lights Guidelines
+https://www.accessguide.io/guide/flashing-lights
 Get Current Working Directory
 https://note.nkmk.me/en/python-os-getcwd-chdir/
 License
@@ -164,7 +173,7 @@ A Permission Error - these occur when Keybird attempts to modify a file that is 
 A General Error    - these occur when Keybird functions incorrectly.
 
 Errors are reported in Python3 as tracebacks through the call stack. The line number and function in source are shown
-as well as the type of of error that occurred. Sometimes errors occur while an error is being handled, in this case a
+as well as the type of error that occurred. Sometimes errors occur while an error is being handled, in this case a
 message will indicate as such, and more information will be printed.
 
 In typical use the traceback will not be printed. You will be given a prompt that indicates an error has occurred and
@@ -188,7 +197,7 @@ the legal section is for, after all. I hope you find Keybird useful, simple, and
 -NOTES-
 Keybird is written in Python3 and Batch for Windows.
 Keybird is open source.
-Version 2.3.0
+Version 2.3.1
 Developed by Andrew Vella
 Copyright (c) 2022
 @PixelatedStarfish on Github and Itch
