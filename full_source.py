@@ -6,6 +6,7 @@ import base64
 import subprocess
 import sys
 import pwinput
+import time
 
 #BASE MENU FUNCTIONS
 	#dinput() "dark input" is a function that maps asdfghjkl to 012345678 so you can use this app in the dark without touching function keys
@@ -32,11 +33,15 @@ def main(d):
 		encrypt_to_file("Files/_help.txt", docs("nano")) #get the Nano section of the docs only
 	except Exception:
 		pass
+	stressRelief()
 	print("Loading Settings.")
 	getSettings()
+	stressRelief()
 	fileCleaner() #File cleaner text printed in this function
 	cleanNanoDroppings() #closing the app while nano is running leaves a .save file in src, this .save needs to be deleted
+	stressRelief()
 	print("Ready.\n----")
+	stressRelief()
 	menu()
 	return
 
@@ -112,6 +117,7 @@ def menu():
 				for i in l:
 					os.remove("Files/" + i)
 					print("Deleted '" + i + "'")
+					stressRelief()
 				print("Done.")
 				input("Press Return (Enter) to close.\n> ")
 				exit()
@@ -529,6 +535,7 @@ def fileCleaner():
 	
 	for i in l:
 		print("Cleaning " + i)
+		stressRelief()
 		path = "Files/" + i
 		s = decrypt_file(path)
 		Parts = s.split("\n\n") 
@@ -609,7 +616,7 @@ Keep untrustworthy people off your computer. Do not store your passwords publicl
 that are easy to guess. Stay safe!
 
 No birds were harmed in the making of Keybird, including the program, online material, documentation, and photography. 
-Wild robin were photographed eating berries from a park tree.
+Wild robins were photographed eating berries from a park tree.
 
 License:
 MIT License
@@ -671,6 +678,7 @@ the main menu.
 You may need to install the Windows Linux Subsystem. A section on how to do that is included in this document.
 
 -WELCOME TO KEYBIRD-
+The purpose of Keybird is to improve the accessibility of password managers without compromising security.
 You need lots of passwords, but making them is tedious. Repeating passwords reduces their effectiveness. In-browser
 managers are fine until they lock you out.
 
@@ -692,6 +700,12 @@ everywhere, depending on a browser extension, or (most likely) both. You can use
 passwords from simple keys, that are easy to create and remember.
 
 -FEATURES-
+Accessibility:
+To prevent flashing lights, loading screens cannot update within the span of one third of a second.
+Also updates to a process, such as modifying files, also cannot update within the span of one third of a second.
+The a, s, d, f, g, h, j, k, and l keys map to 0 through 8. So you can use Keybird in the dark without issue.
+(Note that an update is text printed to the screen.)
+
 Keys:
 This app uses keys to make passwords. The keys are easy to remember. The passwords are secure.
 Keys are 16 characters max.
@@ -750,6 +764,8 @@ Copy to Clipboard
 https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
 Encryption
 https://www.geeksforgeeks.org/encoding-and-decoding-base64-strings-in-python/
+Flashing Lights Guidelines
+https://www.accessguide.io/guide/flashing-lights
 Get Current Working Directory
 https://note.nkmk.me/en/python-os-getcwd-chdir/
 License
@@ -767,7 +783,7 @@ A Permission Error - these occur when Keybird attempts to modify a file that is 
 A General Error    - these occur when Keybird functions incorrectly.
 
 Errors are reported in Python3 as tracebacks through the call stack. The line number and function in source are shown
-as well as the type of of error that occurred. Sometimes errors occur while an error is being handled, in this case a
+as well as the type of error that occurred. Sometimes errors occur while an error is being handled, in this case a
 message will indicate as such, and more information will be printed.
 
 In typical use the traceback will not be printed. You will be given a prompt that indicates an error has occurred and
@@ -835,6 +851,7 @@ def openNano(s):
 	print("*Loading Nano*")
 	print(docs("nano"))
 	print("*Loading Nano*")
+	stressRelief()
 	subprocess.run(["wsl", "nano","_temp.txt", "-t"])
 	f = open("_temp.txt", "r")
 	n = f.read()
@@ -850,18 +867,24 @@ def openNano(s):
 
 	return s
 
+
 def openNanoMac(s):
 	#I'm going to do my own saving prompt 
 	f = open("_temp.txt", "w")
 	f.write(s)
 	f.close()
-	print("Writing File to Text Editor (Nano).")
+	clear()
+	print("*Loading Nano*")
+	print(docs("nano"))
+	print("*Loading Nano*")
+	stressRelief()
 	subprocess.run(["nano","_temp.txt", "-t"])
 	f = open("_temp.txt", "r")
 	n = f.read()
 	f.close()
 	os.remove("_temp.txt")
-	a = YesOrNo("Would you like to save your edit, yes or no (y/n)?\n>  ")
+	clear()
+	a = YesOrNo("Would you like to save your edit? (y/n)?\n>  ")
 	if (a):
 		s = n
 		print("Saved.")
@@ -888,25 +911,35 @@ def dinput(s):
 	#in the dark, you can still use the home row instead of groping for numbers and hitting function keys
 	a = input(s)
 
-	if (a == "a"):
+	if (a.lower() == "a"):
 		a = "0"
-	if (a == "s"):
+	if (a.lower() == "s"):
 		a = "1"
-	if (a == "d"):
+	if (a.lower() == "d"):
 		a = "2"
-	if (a == "f"):
+	if (a.lower() == "f"):
 		a = "3"
-	if (a == "g"):
+	if (a.lower() == "g"):
 		a = "4"
-	if (a == "h"):
+	if (a.lower() == "h"):
 		a = "5"
-	if (a == "j"):
+	if (a.lower() == "j"):
 		a = "6"
-	if (a == "k"):
+	if (a.lower() == "k"):
 		a = "7"
-	if (a == "l"):
+	if (a.lower() == "l"):
 		a = "8"
 	return a
+
+def stressRelief():
+	#extends process times by a random fraction of a second when used.
+	#The purpose is to keep text from flashing and disappering quickly.
+	
+	#gap = random.randint(3, 4) for variation if needed
+	
+	time.sleep(.3 / 10) # gap / 10 (if needed for variation)
+	return
+
 
 #TESTING
 def test():
@@ -973,6 +1006,7 @@ def randomSampleFile(kOne):
 	#this function is for testing the file cleaner
 	kTwo = randomKey()
 	for i in range (0, 20):
+		stressRelief()
 		if (random.randint(1, 3) == 2): 
 			kTwo = randomKey() #for testing alphabetical sort and duplicate key deletion in the file cleaner
 		r = (genResult(kOne, kTwo))
@@ -998,7 +1032,7 @@ def randomKey():
 	return SAMPLE_KEYS[random.randint(0, len(SAMPLE_KEYS) -1 )].replace("\t", "")
 
 #MAIN
-print("Initializing.")
+print("Initializing.") 
 
 #globals
 SAVE = False
@@ -1008,11 +1042,12 @@ LINE = 100
 KEY_LENGTH = 16
 PASSWORD_LENGTH = 16
 ENCODING = "utf_8" 
-VERSION = "2.3.0" #Keybasket 2.0
+VERSION = "2.3.1" #Keybasket 2.0
 
 print("Loading Working Directory.")
 #set cwd to source file
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+stressRelief()
 
 try: 
 	main(" ")
