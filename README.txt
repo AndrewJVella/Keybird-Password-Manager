@@ -199,7 +199,7 @@ the legal section is for, after all. I hope you find Keybird useful, simple, and
 -NOTES-
 Keybird is written in Python3 and Batch for Windows.
 Keybird is open source.
-Version 2.3.2
+Version 2.3.3
 Developed by Andrew Vella
 Copyright (c) 2022
 @PixelatedStarfish on Github and Itch
