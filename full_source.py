@@ -415,6 +415,8 @@ def getFileList():
 	for i in l:
 		if (i[0] == '_' and i[1] == '_'):
 			l.remove(i)
+		if (i == ".txt"):
+			l.remove(i)
 	return l
 
 
@@ -462,7 +464,6 @@ def fileCleaner():
 		encrypt_to_file(path, encryptable)
 		
 	 
-
 ##extracts a key from a line of text that has a key in it.##
 def extractKeyFromLine(s):
 	if(len((s).split("\t")) < 2):
@@ -845,9 +846,6 @@ def clear():
 def clearMac():
 	os.system('clear')
 	
-
-
-
 #ACCESSIBILITY
 def dinput(s):
 	##In the dark, you can use the home row instead of groping for numbers and hitting function keys.##
@@ -892,15 +890,12 @@ def test():
 
 	print("All tests are completed.")
 	
-
 def debugTest():
 	print("---\nDEBUG MODE TEST\n---")
 	global DEBUG
 	DEBUG = True
 
 	4 // 0 #throws error (cannot divide by 0)
-
-	
 
 def maskedInputTest():
 	d = pwinput.pwinput()
@@ -932,9 +927,7 @@ def openTextEditorTest():
 	f.close()
 
 	os.remove("_temp.txt")
-
 	
-
 def encrpytAndDecryptTest(message):
 	print("---\nENCRYPT AND DECRYPT TEST:\n---")
 	message = getRandMessage()
@@ -1073,5 +1066,5 @@ LINE = 100
 KEY_LENGTH = 16
 PASSWORD_LENGTH = 16
 ENCODING = "utf_8" #for encryption
-VERSION = "2.3.2" #Keybasket 2.0
+VERSION = "2.3.3" #Keybasket 2.0
 main()
