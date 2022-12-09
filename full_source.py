@@ -78,6 +78,9 @@ def twoKey():
 		kOne = input(">  ")
 
 	kTwo = input("\nGive a Site Key, such as a website name:\n> ")[0:KEY_LENGTH]
+	if (len(kOne) == 0 or len(kTwo) == 0):
+		print("One of the keys is empty: no result.")
+		return
 	r = (genResult(kOne, kTwo))
 	if (MASK):
 		print("\nResult:\n" + ("*" * PASSWORD_LENGTH) + "\n")
@@ -99,6 +102,9 @@ def oneKey():
 	if (not MASK):
 		kOne = input(">  ")
 	kTwo = "Default_Key_2"
+	if (len(kOne) == 0):
+		print("Key one is empty: no result.")
+		return
 	r = (genResult(kOne, kTwo))
 	if (MASK):
 		print("\nResult:\n" + ("*" * PASSWORD_LENGTH) + "\n")
@@ -414,8 +420,6 @@ def getFileList():
 	#REMOVE HIDDEN FILES
 	for i in l:
 		if (i[0] == '_' and i[1] == '_'):
-			l.remove(i)
-		if (i == ".txt"):
 			l.remove(i)
 	return l
 
@@ -1066,5 +1070,5 @@ LINE = 100
 KEY_LENGTH = 16
 PASSWORD_LENGTH = 16
 ENCODING = "utf_8" #for encryption
-VERSION = "2.3.3" #Keybasket 2.0
+VERSION = "2.3.4" #Keybasket 2.0
 main()
