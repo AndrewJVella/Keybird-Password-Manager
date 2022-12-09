@@ -82,11 +82,11 @@ Note that G can be substituted for any letter to get another shortcut. You shoul
 this window. ^X exits the nano editor and returns to Keybird. For more information use ^G.
 
 Important Operations:
-^G Help
-^X  Exit; go back to Keybird
-up and down arrowsScroll
-M-U:Undo
-M-E:Redo
+^G                                      Help
+^X                              Exit; go back to Keybird
+up and down arrows      Scroll
+M-U:                            Undo
+M-E:                            Redo
 
 Upon finishing your edit and exiting, you will be asked if you want to save your edit. Type "yes" or "y" to save your
 edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
@@ -114,8 +114,8 @@ Two underscores means the file is hidden.
 Tests are written into the source.
 At the main menu select the following:
 -1 for general testing purposes
--2 to run the file cleaner
--3 to generate sample files
+-2 to generate sample files
+
 
 
 -LEGAL-
@@ -152,6 +152,8 @@ Clear Screen
 https://www.csestack.org/clear-python-interpreter-console/
 Copy to Clipboard
 https://stackoverflow.com/questions/11063458/python-script-to-copy-text-to-clipboard
+Documentation Conventions
+https://peps.python.org/pep-0257/
 Encryption
 https://www.geeksforgeeks.org/encoding-and-decoding-base64-strings-in-python/
 Flashing Lights Guidelines
@@ -197,7 +199,7 @@ the legal section is for, after all. I hope you find Keybird useful, simple, and
 -NOTES-
 Keybird is written in Python3 and Batch for Windows.
 Keybird is open source.
-Version 2.3.1
+Version 2.3.2
 Developed by Andrew Vella
 Copyright (c) 2022
 @PixelatedStarfish on Github and Itch
