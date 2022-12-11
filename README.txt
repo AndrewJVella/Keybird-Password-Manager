@@ -1,5 +1,5 @@
 -FIRST START UP-
-To download from Github select the zip file "Keybird Inside", click on it, then click "view raw".
+To download from Github select the zip file "Keybird", click on it, then click "view raw" or the download button.
 
 Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybrid and click
 start.bat. A dialogue box should pop up, click "Extract all" and save it to the Desktop. You will not have to
@@ -64,6 +64,10 @@ Toggle file saving
 Toggle masking, which covers private stuff.
 Toggle debug mode, which prints errors.
 
+Notepad:
+A notepad file is editable from the File Menu. Store usernames, passwords, and other things here and they will be
+encrypted in the same manner as other files (protection from accidents, not attacks).
+
 Web Repl:
 Use the repl when you leave this app at home. If you need a password quickly, use your key. Nothing is saved on the
 repl.
@@ -82,11 +86,11 @@ Note that G can be substituted for any letter to get another shortcut. You shoul
 this window. ^X exits the nano editor and returns to Keybird. For more information use ^G.
 
 Important Operations:
-^G                                      Help
-^X                              Exit; go back to Keybird
-up and down arrows      Scroll
-M-U:                            Undo
-M-E:                            Redo
+^G -- Help
+^X -- Exit; go back to Keybird
+Up and Down arrows -- Scroll
+M-U -- Undo
+M-E -- Redo
 
 Upon finishing your edit and exiting, you will be asked if you want to save your edit. Type "yes" or "y" to save your
 edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
@@ -115,7 +119,6 @@ Tests are written into the source.
 At the main menu select the following:
 -1 for general testing purposes
 -2 to generate sample files
-
 
 
 -LEGAL-
@@ -167,7 +170,7 @@ https://www.nano-editor.org/dist/latest/nano.html
 Password Masking
 https://stackoverflow.com/questions/9202224/getting-a-hidden-password-input
 
--ERRORS AND DEBUG MODE-
+-ERRORS AND DEBUG-
 Errors happen, and a well designed program can handle them fairly well There are two kinds of errors that Keybird is
 designed to handle:
 
@@ -179,10 +182,9 @@ as well as the type of error that occurred. Sometimes errors occur while an erro
 message will indicate as such, and more information will be printed.
 
 In typical use the traceback will not be printed. You will be given a prompt that indicates an error has occurred and
-you can close the app by pressing enter (return). If you would like to see debug information, run Keybird in
-DEBUG mode, which can be toggled on and in the Settings menu. If DEBUG mode is off, you can still type "debug",
-"traceback", or "report" to get the debug info. That said, I want to keep the error message as simple as I can, to
-prevent needless confusion. No one wants to see a wall of text when they are trying to understand what just happened!
+you can close the app by pressing enter (return). Type "debug", "traceback", or "report" into the error prompt
+to get the debug info. That said, I want to keep the error message as simple as I can, to prevent needless confusion.
+No one wants to see a wall of text when they are trying to understand what just happened!
 
 You are certainly welcome to reach out to me regarding an error in Keybird. I would appreciate your time.
 You can reach out by email, Github, or Itch.
@@ -199,7 +201,7 @@ the legal section is for, after all. I hope you find Keybird useful, simple, and
 -NOTES-
 Keybird is written in Python3 and Batch for Windows.
 Keybird is open source.
-Version 2.3.4
+Version 2.4
 Developed by Andrew Vella
 Copyright (c) 2022
 @PixelatedStarfish on Github and Itch
