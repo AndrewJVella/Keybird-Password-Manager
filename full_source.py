@@ -17,13 +17,18 @@ import pwinput
 #Modified password hashing function, an additional offset provides greater variation
 #Reformatted nano quick help for consistant whitespace on nano
 
+#for 2.4.1
+#adding a stress relief before the edit prompt. Text flashes quick there. Done
+#also changed the print message for a cancelled edit. Done
+#I would also like to move the web app to trinket and just remove masking. I know it is not ideal but it can be put on the Github index page. I will add a warning to users.
+
 #MENU
 ##The Main Menu, with a welcome message##
 def menu():
 	global VERSION
 	clear()
 	while (True):
-		print("Thank you for using the Keybird Password Manager.\nVersion " +VERSION+ "\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.")
+		print("Thank you for using the Keybird Password Manager (Windows Edition).\nVersion " +VERSION+ "\nCopyright 2022.\n\nThis is created by Andrew Vella.\nEmail:  andyjvella@gmail.com.\nGithub: @PixelatedStarfish\n\nPlease see the Disclaimer and License, before using this app.")
 		a = dinput("\nType a number and press enter (return) to select an option:\n0  Help\n1  One Key Mode\n2  Two Key Mode\n3  Username Generator\n4  File Menu\n5  Settings Menu\n6  Disclaimer and License\n7  Erase Data\n8  Close\n> ")
 		if (a == "-1"):
 			test()
@@ -81,9 +86,9 @@ def twoKey():
 	clear()
 	print("\nGive a Username Key. Be sure it is not easily guessed:\n")
 	if (MASK):
-		kOne = pwinput.pwinput(">>  ")
+		kOne = pwinput.pwinput(">>  ")[0:KEY_LENGTH]
 	if (not MASK):
-		kOne = input(">  ")
+		kOne = input(">  ")[0:KEY_LENGTH]
 
 	kTwo = input("\nGive a Site Key, such as a website name:\n> ")[0:KEY_LENGTH]
 	if (len(kOne) == 0 or len(kTwo) == 0):
@@ -112,7 +117,7 @@ def oneKey():
 	if (MASK):
 		kOne = pwinput.pwinput(">>  ")[0:KEY_LENGTH]
 	if (not MASK):
-		kOne = input(">  ")
+		kOne = input(">  ")[0:KEY_LENGTH]
 	kTwo = "Default_Key_2"
 	if (len(kOne) == 0):
 		print("Key is empty: no result.")
@@ -814,13 +819,14 @@ def openNano(s):
 	n = f.read()
 	f.close()
 	os.remove("_temp.txt")
+	stressRelief()
 	clear()
 	a = YesOrNo("Would you like to save your edit? (y/n)?\n>  ")
 	if (a):
 		s = n
 		print("Saved.")
 	if (not a):
-		print("Cancelled.")
+		print("Your edit is cancelled.")
 
 	return s
 
@@ -840,6 +846,7 @@ def openNanoMac(s):
 	n = f.read()
 	f.close()
 	os.remove("_temp.txt")
+	stressRelief()
 	clear()
 	a = YesOrNo("Would you like to save your edit? (y/n)?\n>  ")
 	if (a):
