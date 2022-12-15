@@ -1,17 +1,17 @@
 -FIRST START UP-
 To download from Github select the zip file "Keybird", click on it, then click "view raw" or the download button.
 
-Keybird is stored inside the zip directory (or folder) "Keybird Inside". Open the zip, then open Keybrid and click
-start.bat. A dialogue box should pop up, click "Extract all" and save it to the Desktop. You will not have to
-extract it again. Open the Keybird directory again and click start. At this point, a blue box will appear that
+Keybird is stored inside the zip directory (or folder) "Keybird". Open the zip, then open Keybrid and click
+installer.bat. A dialogue box should pop up, click "Extract all" and save it to the Desktop. You will not have to
+extract it again. Open the Keybird directory again and click installer. At this point, a blue box will appear that
 reads "Windows Protected Your PC", this is a rightly paranoid security measure to protect you from malware.
 I gave you my email and my source code (in src). You can decide what to do next.
 
 If you still want to try Keybird. You should click the underlined text "More Info", and then click run. A window
-will open and start running a shell. You may see some text for a short time as the app loads. Then you will see
-the main menu.
+will open and start running a shell. You may see some text for a short time as the installation runs. Then you
+should see the main menu. You do not need to run the installer every time. You can run the app from start.bat.
+(You may need to deal with the paranoid screen one more time, click "More Info", and run again.)
 
-You may need to install the Windows Linux Subsystem. A section on how to do that is included in this document.
 
 -WELCOME TO KEYBIRD-
 The purpose of Keybird is to improve the accessibility of password managers without compromising security.
@@ -95,12 +95,6 @@ M-E -- Redo
 Upon finishing your edit and exiting, you will be asked if you want to save your edit. Type "yes" or "y" to save your
 edit to the file you have selected. The file will be overwritten by the edit and encrypted. Type "no" or "n" to cancel
 the edit.
-
--INSTALL WSL-
-#if you require the windows linux subsystem to run nano (the text editor used by Keybird)
-#run this command in Command Prompt by typing it in and pressing enter (return).
-
-wsl --install
 
 -GITHUB-
 https://github.com/PixelatedStarfish/Keybird-Password-Manager
@@ -201,7 +195,7 @@ the legal section is for, after all. I hope you find Keybird useful, simple, and
 -NOTES-
 Keybird is written in Python3 and Batch for Windows.
 Keybird is open source.
-Version 2.4
+Version 2.4.2
 Developed by Andrew Vella
 Copyright (c) 2022
 @PixelatedStarfish on Github and Itch
