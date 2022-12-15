@@ -100,7 +100,7 @@ the edit.
 https://github.com/PixelatedStarfish/Keybird-Password-Manager
 
 -WEB REPL-
-tinyurl.com/KeybirdWeb
+https://pixelatedstarfish.github.io/Keybird-Password-Manager/
 
 -INDICATORS-
 Note that a filename that begins with an underscore is reserved.
