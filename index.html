@@ -1,24 +1,90 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body {
                font-family: Tahoma, sans-serif;
             }
             
-            table, th, td {
-              border: 1px solid;
-            }
+          * {
+  box-sizing: border-box;
+}
+
+a {
+color: #77AA33;
+}
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 60%;
+  padding: 50px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.column2 {
+  float: left;
+  width: 40%;
+  padding: 50px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.slogan {
+             line-height: 15px;
+             height: 10px;
+             text-align: center;
+}
+
             
-            </style>
+            .titles {
+             line-height: 25px;
+             height: 50px;
+             text-align: center;
+}
+
+</style>
+</head>
+
+<body style="background-color:black;">
             <meta charset="UTF-8"/>
             <title>Keybird Homepage</title>
             
-            <body style="background-color:lightgoldenrodyellow;">
-    </head>
-    <body>
-        <img src="Images\keyb.png" alt="The Keybird Logo. A robin eats a red berry."  style="width:127px;height:128px;">
-        <p>Take contol of your passwords with Keybird.</p>
-        <iframe src="https://trinket.io/embed/python3/99d3a5ba99?outputOnly=true&runOption=run&start=result" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-    </body>
+
+        <div class="titles">
+        <h1 style="color:#777EEE;">Keybird Password Manager</h1>
+        </div>
+
+        <div class="slogan">
+        <p style="color:#777EEE;">Take contol of your passwords with Keybird.</p>
+        </div> 
+
+
+<div class="row">
+  <div class="column" style="background-color:#000;">
+    <h2 style="color:#777EEE;">Try Keybird Here</h2>
+    <iframe src="https://trinket.io/embed/python3/99d3a5ba99?outputOnly=true&runOption=run&start=result" width="650" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+  </div>
+  <div class="column2" style="background-color:#000;">
+    <h2 style="color:#777EEE;">Download Keybird</h2>
+    
+    <a href="Downloads/Keybird (Windows).zip" download>Get Keybird for Windows</a><br>
+    <a href="Downloads/Keybird (Mac).zip" download>Get Keybird for Mac</a><br>
+    <a href="Downloads/Keybird (Linux).zip" download>Get Keybird for Linux</a><br><br>
+
+    
+    <img src="Images\keyb.png" alt="The Keybird Logo. A robin eats a red berry."  style="width:127px;height:128px;"><br>
+    <a href="https://github.com/PixelatedStarfish/Keybird-Password-Manager">Keybird is open source on Github.</a>
+
+
+  </div>
+</div>
+
+</body>
 </html>
