@@ -1,42 +1,15 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            body {
-               font-family: Tahoma, sans-serif;
-            }
-            
-          * {
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
   box-sizing: border-box;
 }
 
-a {
-color: #77AA33;
-}
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-}
-
-
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.slogan {
-             line-height: 20px;
-             height: 0px;
-             text-align: left;
-}
-
-            
-
+body {
+               font-family: Tahoma, sans-serif;
+            }
 
 .ico {
              line-height: 50px;
@@ -44,59 +17,101 @@ color: #77AA33;
              text-align: left;
 }
 
+a {
+color: #77AA33
+}
+
+p {
+  color:#9977AA
+
+}
+
+h1 {
+  color: #777EEE
+}
+
+h2 {
+  color: #777EEE
+}
+
+h3 {
+  color: #777EEE
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
 </style>
 </head>
+  
+<body style="background-color: #000;">
+  <meta charset="UTF-8"/>
+  <title>Keybird Homepage</title>
 
-<body style="background-color:black;">
-            <meta charset="UTF-8"/>
-            <title>Keybird Homepage</title>
-            
-         <div class="ico">
-          <img src="Images\keyb.png" alt="The Keybird Logo. A robin eats a red berry."  style="width:127px;height:128px;"><br>
-         </div>
-    
-    
-        <div class="slogan">
-        <h3 style="color:#777EEE;">Take contol of your passwords with Keybird.</h3>
-        </div> 
-<br>
+  <div class="ico">
+    <img src="Images\keyb.png" alt="The Keybird Logo. A robin eats a red berry."  style="width:127px;height:128px;"><br>
+   </div>
+
+<h2>Take contol of your passwords with Keybird.</h2>
+
 
 <div class="row">
-<div class="column" style="background-color:#000;">
-  <h2 style="color:#777EEE;">What is Keybird?</h2>
-
-<p style="color:#777EEE;">
-The purpose of Keybird is to improve the accessibility of password managers<br>
-without compromising security.<br>
-You need lots of passwords but making them is tedious and in-browser managers<br>
-can lock you out.<br><br>
-
-You may ask yourself:<br>
-"What was my password again?"<br>
-"Why does Safari fill in the wrong info?"<br>
-"Did I make this account on Google?"<br><br>
-
-Skip that nonsense, use Keybird.<br><br>
-
-Keybird is designed to generate and store passwords on your computer.<br>
-You can use Keybird to generate secure passwords from simple keys,<br>
-which are easy to create and remember.</p><br>
-
-    <h2 style="color:#777EEE;">Try Keybird Here</h2>
-    <a href="https://trinket.io/embed/python3/99d3a5ba99?outputOnly=true&runOption=run&start=result">Try Keybird Web Edition.</a>
-    <br>
-    <p style="color:#777EEE;">Please be sure to click the "Run" button. </p><br>
-
-    <h2 style="color:#777EEE;">Download Keybird</h2>
+  <div class="column" style="background-color:#000;">
+    <h3>What is Keybird?</h3>
+    <p>
+      The purpose of Keybird is to improve the accessibility of password managers<br>
+      without compromising security. It generates and store passwords<br>on your computer.<br><br>
+      
+      You need a lot of passwords but making them is tedious.<br>In-browser managers
+      can lock you out.<br><br>
+      
+      You may ask yourself:<br>
+      "What was my password again?"<br>
+      "Why does Safari fill in the wrong info?"<br>
+      "Did I make this account on Google?"<br><br>
+      
+      Skip that nonsense, use Keybird.<br><br>
+      
+      You can use Keybird to generate secure passwords from simple keys,<br>
+      which are easy to create and remember.</p><br>
+      
+        
+  </div>
+  <div class="column" style="background-color:#000;">
+    <h3>Download Keybird</h3>
     
     <a href="Downloads/Keybird (Windows).zip" download>Get Keybird for Windows</a><br>
     <a href="Downloads/Keybird (Mac).zip" download>Get Keybird for Mac</a><br>
     <a href="Downloads/Keybird (Linux).zip" download>Get Keybird for Linux</a><br><br>
 
+    <h3>Try Keybird Online</h3>
+    <a href="https://trinket.io/embed/python3/99d3a5ba99?outputOnly=true&runOption=run&start=result">Try Keybird Web Edition.</a>
+    <br>
+    <p>Please be sure to click the "Run" button. </p><br>
+  
     
     <a href="https://github.com/PixelatedStarfish/Keybird-Password-Manager">Keybird is open source on Github.</a>
-
-
+  
+  
+  
   </div>
 </div>
 
