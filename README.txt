@@ -1,17 +1,21 @@
--FIRST START UP-
+-INSTALL-
 To download from Github select the zip file "Keybird", click on it, then click "view raw" or the download button.
 
-Keybird is stored inside the zip directory (or folder) "Keybird". Open the zip, then open Keybrid and click
-installer.bat. A dialogue box should pop up, click "Extract all" and save it to the Desktop. You will not have to
-extract it again. Open the Keybird directory again and click installer. At this point, a blue box will appear that
-reads "Windows Protected Your PC", this is a rightly paranoid security measure to protect you from malware.
-I gave you my email and my source code (in src). You can decide what to do next.
+This is the Linux Edition. If you would like to install Ubuntu, you can do so here:
+https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview
 
-If you still want to try Keybird. You should click the underlined text "More Info", and then click run. A window
-will open and start running a shell. You may see some text for a short time as the installation runs. Then you
-should see the main menu. You do not need to run the installer every time. You can run the app from start.bat.
-(You may need to deal with the paranoid screen one more time, click "More Info", and run again.)
+(If you know more than I do and are rolling your eyes at these instructions, email me nicely about your way!)
+If you click on this file, after extraction. It will create a Keybird directory, install pip and pwinput and
+write the main source file in Keybird/src. You can stop there if that works for you.
 
+For installation on a virtual environment, (ie Ubuntu) copy the content of the installation file, open Ubuntu
+cd into the directory of your choice and do the following:
+cat > install.sh
+(Right click to paste)
+control, shift, D (or command, shift, D) push all 3 keys at once.
+bash ./install.sh
+
+That's it. The ls command should show you a Keybird directory.
 
 -WELCOME TO KEYBIRD-
 The purpose of Keybird is to improve the accessibility of password managers without compromising security.
@@ -100,7 +104,7 @@ the edit.
 https://github.com/PixelatedStarfish/Keybird-Password-Manager
 
 -WEB REPL-
-https://pixelatedstarfish.github.io/Keybird-Password-Manager/
+tinyurl.com/KeybirdWeb
 
 -INDICATORS-
 Note that a filename that begins with an underscore is reserved.
@@ -193,11 +197,11 @@ I do not take responsibility for damages or inconveniences that result from the 
 the legal section is for, after all. I hope you find Keybird useful, simple, and enjoyable. Good luck!
 
 -NOTES-
-Keybird is written in Python3 and Batch for Windows.
+Keybird is written in Python3 for Windows, Mac, and Linux.
 Keybird is open source.
-Version 2.4.2
+Version 2.4.3
 Developed by Andrew Vella
 Copyright (c) 2022
-@PixelatedStarfish on Github and Itch
-andyjvella@gmail.com
+@AndrewJVella on Github
+avella1@skidmore.edu
 Thank you for using Keybird!
