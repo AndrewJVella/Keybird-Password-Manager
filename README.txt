@@ -1,11 +1,24 @@
--INSTALL-
+-WINDOWS INSTALL-
 To download from Github select the zip file "Keybird", click on it, then click "view raw" or the download button.
 
-This is the Linux Edition. If you would like to install Ubuntu, you can do so here:
+Keybird is stored inside the zip directory (or folder) "Keybird". Open the zip, then open Keybrid and click
+installer.bat. A dialogue box should pop up, click "Extract all" and save it to the Desktop. You will not have to
+extract it again. Open the Keybird directory again and click installer. At this point, a blue box will appear that
+reads "Windows Protected Your PC", this is a rightly paranoid security measure to protect you from malware.
+I gave you my email and my source code (in src). You can decide what to do next.
+
+If you still want to try Keybird. You should click the underlined text "More Info", and then click run. A window
+will open and start running a shell. You may see some text for a short time as the installation runs. Then you
+should see the main menu. You do not need to run the installer every time. You can run the app from start.bat.
+(You may need to deal with the paranoid screen one more time, click "More Info", and run again.)
+
+-LINUX AND MAC OS INSTALL-
+To download from Github select the zip file "Keybird", click on it, then click "view raw" or the download button.
+
+If you would like to install Ubuntu, you can do so here:
 https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview
 
-(If you know more than I do and are rolling your eyes at these instructions, email me nicely about your way!)
-If you click on this file, after extraction. It will create a Keybird directory, install pip and pwinput and
+If you click on the Keybird zip file, after extraction. It will create a Keybird directory, install pip and pwinput and
 write the main source file in Keybird/src. You can stop there if that works for you.
 
 For installation on a virtual environment, (ie Ubuntu) copy the content of the installation file, open Ubuntu
@@ -16,6 +29,8 @@ control, shift, D (or command, shift, D) push all 3 keys at once.
 bash ./install.sh
 
 That's it. The ls command should show you a Keybird directory.
+
+(The mac version provides opening directions in a screenshot.)
 
 -WELCOME TO KEYBIRD-
 The purpose of Keybird is to improve the accessibility of password managers without compromising security.
@@ -72,10 +87,6 @@ Notepad:
 A notepad file is editable from the File Menu. Store usernames, passwords, and other things here and they will be
 encrypted in the same manner as other files (protection from accidents, not attacks).
 
-Web Repl:
-Use the repl when you leave this app at home. If you need a password quickly, use your key. Nothing is saved on the
-repl.
-
 -EDIT MODE (HOW TO USE NANO)-
 Nano is a text editor that runs on linux. It can also run on the Windows Linux Subsystem. Keybird uses nano to edit
 the (unencrypted) contents of a file. The File Edit Mode opens the nano text editor after writing unencrypted file
@@ -101,10 +112,10 @@ edit to the file you have selected. The file will be overwritten by the edit and
 the edit.
 
 -GITHUB-
-https://github.com/PixelatedStarfish/Keybird-Password-Manager
+https://github.com/AndrewJVella/Keybird-Password-Manager
 
--WEB REPL-
-tinyurl.com/KeybirdWeb
+-WEBSITE-
+https://andrewjvella.github.io/Keybird-Password-Manager/
 
 -INDICATORS-
 Note that a filename that begins with an underscore is reserved.
